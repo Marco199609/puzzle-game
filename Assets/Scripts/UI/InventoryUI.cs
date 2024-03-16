@@ -1,8 +1,8 @@
 using SnowHorse.Utils;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
@@ -12,16 +12,24 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject itemUIContainer;
     [SerializeField] private Image itemImagePrefab;
     [SerializeField] private TextMeshProUGUI itemName;
-    [SerializeField] private List<Button> slots;
+    [SerializeField] private Button[] slots;
 
     private float currentLerpTime;
+
+    private void Start()
+    {
+        foreach (Button slot in slots)
+        {
+            slot.onClick.AddListener(RemoveInventoryItem);
+        }
+    }
 
     public void ShowItem(ItemData item)
     {
         itemName.text = item.Name;
         var image = SetItemUISprite(item);
 
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             if (!slots[i].gameObject.activeInHierarchy)
             {
@@ -35,6 +43,8 @@ public class InventoryUI : MonoBehaviour
     {
         itemUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
+        slot.gameObject.SetActive(true);
+        image.transform.SetParent(slot);
 
         if (item.ScaleInPreviewUI != Vector2.zero) image.rectTransform.sizeDelta = item.ScaleInPreviewUI;
         else Debug.Log("Please set item UI preview scale!");
@@ -52,9 +62,7 @@ public class InventoryUI : MonoBehaviour
 
         yield return new WaitForSeconds(itemPreviewDuration);
 
-        slot.gameObject.SetActive(true);
         itemUIContainer.SetActive(false);
-        image.transform.SetParent(slot);
 
         currentLerpTime = 0;
         float percentage = 0;
@@ -71,6 +79,43 @@ public class InventoryUI : MonoBehaviour
         }
 
         Debug.Log("Finished moving inventory UI");
+    }
+
+    public void RemoveInventoryItem()
+    {
+        var slot = EventSystem.current.currentSelectedGameObject;
+
+        var removed = false;
+
+        if(slot.TryGetComponent(out Button button))
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if(!removed && button == slots[i])
+                {
+                    Inventory.Instance.Remove(Inventory.Instance.Get[i]);
+                    Destroy(slot.transform.GetChild(0).gameObject);
+                    removed = true;
+                }
+                
+                if(removed)
+                {
+                    if (i < slots.Length - 1 && slots[i + 1].transform.childCount > 0)
+                    {
+                        slots[i + 1].transform.GetChild(0).SetParent(slots[i].transform);
+                        slots[i].transform.GetChild(slots[i].transform.childCount - 1).GetComponent<RectTransform>().anchoredPosition = Vector3.zero; //Remember Destroy previous child sets in at the end of frame
+                    }
+                    else
+                    {
+                        slots[i].gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.Log($"Slot {slot.name} passed by the inventory to the UI is invalid!");
+        }
     }
 
     private Image SetItemUISprite(ItemData item, bool preserveAspect = true)

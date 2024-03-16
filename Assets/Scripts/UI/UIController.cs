@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(InventoryUI))]
 public class UIController : MonoBehaviour
@@ -24,7 +20,7 @@ public class UIController : MonoBehaviour
         inventoryUI = GetComponent<InventoryUI>();
     }
 
-    public void ShowItem(ItemData item)
+    public void ShowInventoryItem(ItemData item)
     {
         inventoryUI.ShowItem(item);
     }

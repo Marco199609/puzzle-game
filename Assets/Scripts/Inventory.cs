@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private List<ItemData> inventory = new List<ItemData>();
     [SerializeField] private ItemData selectedItem;
-    
 
     public static Inventory Instance;
 
@@ -22,7 +24,7 @@ public class Inventory : MonoBehaviour
 
     public void Add(ItemData item)
     {
-        UIController.Instance.ShowItem(item);
+        UIController.Instance.ShowInventoryItem(item);
         item.gameObject.SetActive(false);
         item.gameObject.transform.SetParent(transform);
         inventory.Add(item);
@@ -34,10 +36,13 @@ public class Inventory : MonoBehaviour
         else Debug.Log($"Item {item.Name} does not exist in inventory!");
     }
 
-    public void Use(ItemData item)
+    public void Remove(ItemData item)
     {
-        selectedItem = null;
-        inventory.Remove(item);
-        //TODO: Update UI
+        if (inventory.Contains(item))
+        {
+            if (selectedItem == item) selectedItem = null;
+            inventory.Remove(item);
+        }
+        else Debug.Log($"Item {item.Name} does not exist in inventory!");
     }
 }
