@@ -48,4 +48,9 @@ public class PlayerController : MonoBehaviour
             UIController.Instance.SetCursor(canInteract);
         }
     }
+
+    private void Inventory()
+    {
+
+    }
 }

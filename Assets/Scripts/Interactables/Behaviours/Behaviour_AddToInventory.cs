@@ -9,7 +9,6 @@ public class Behaviour_AddToInventory : MonoBehaviour, IBehaviour
 
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
-        UIController.Instance.ShowItem(item);
-        item.gameObject.SetActive(false);
+        if(onInteraction && isInspecting || onInspection && isInspecting || onInteraction == isInteracting == onInspection == isInspecting == false) Inventory.Instance.Add(item);
     }
 }
