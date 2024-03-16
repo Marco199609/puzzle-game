@@ -25,6 +25,11 @@ public class UIController : MonoBehaviour
         inventoryUI.ShowItem(item);
     }
 
+    public void RemoveInventoryItem()
+    {
+        inventoryUI.RemoveInventoryItem();
+    }
+
     public void SetCursor(bool canInteract)
     {
         var cursor = canInteract ? circle : cross;

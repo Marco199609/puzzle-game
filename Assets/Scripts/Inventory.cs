@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
         else Destroy(this);
     }
 
-    public List<ItemData> Get { get => inventory; }
+    public List<ItemData> GetInventoryItems { get => inventory; }
     public List<ItemData> Set { set => inventory = value; }
 
     public ItemData GetSelected { get => selectedItem; }
@@ -36,12 +36,15 @@ public class Inventory : MonoBehaviour
         else Debug.Log($"Item {item.Name} does not exist in inventory!");
     }
 
-    public void Remove(ItemData item)
+    public void UseItem(ItemData item)
     {
         if (inventory.Contains(item))
         {
             if (selectedItem == item) selectedItem = null;
             inventory.Remove(item);
+            Destroy(item.gameObject);
+
+            UIController.Instance.RemoveInventoryItem();
         }
         else Debug.Log($"Item {item.Name} does not exist in inventory!");
     }

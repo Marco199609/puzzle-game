@@ -14,13 +14,24 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private Button[] slots;
 
+    private Button selectedSlot;
     private float currentLerpTime;
 
     private void Start()
     {
-        foreach (Button slot in slots)
+        foreach(var slot in slots)
         {
-            slot.onClick.AddListener(RemoveInventoryItem);
+            slot.onClick.AddListener(() =>
+            {
+                selectedSlot = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if (selectedSlot.gameObject == slots[i].gameObject) Inventory.Instance.Select(Inventory.Instance.GetInventoryItems[i]);
+
+                    slots[i].GetComponent<Image>().enabled = selectedSlot.gameObject == slots[i].gameObject;
+                }
+            });
         }
     }
 
@@ -34,7 +45,7 @@ public class InventoryUI : MonoBehaviour
             if (!slots[i].gameObject.activeInHierarchy)
             {
                 StartCoroutine(AddToInventoryUI(item, image, slots[i].transform));
-                break;
+                return;
             }
         }
     }
@@ -83,38 +94,29 @@ public class InventoryUI : MonoBehaviour
 
     public void RemoveInventoryItem()
     {
-        var slot = EventSystem.current.currentSelectedGameObject;
-
         var removed = false;
 
-        if(slot.TryGetComponent(out Button button))
+        for (int i = 0; i < slots.Length; i++)
         {
-            for (int i = 0; i < slots.Length; i++)
+            if (!removed && selectedSlot == slots[i])
             {
-                if(!removed && button == slots[i])
+                Destroy(selectedSlot.transform.GetChild(0).gameObject);
+                selectedSlot.GetComponent<Image>().enabled = false;
+                removed = true;
+            }
+
+            if (removed)
+            {
+                if (i < slots.Length - 1 && slots[i + 1].transform.childCount > 0)
                 {
-                    Inventory.Instance.Remove(Inventory.Instance.Get[i]);
-                    Destroy(slot.transform.GetChild(0).gameObject);
-                    removed = true;
+                    slots[i + 1].transform.GetChild(0).SetParent(slots[i].transform);
+                    slots[i].transform.GetChild(slots[i].transform.childCount - 1).GetComponent<RectTransform>().anchoredPosition = Vector3.zero; //Remember Destroy previous child sets in at the end of frame
                 }
-                
-                if(removed)
+                else
                 {
-                    if (i < slots.Length - 1 && slots[i + 1].transform.childCount > 0)
-                    {
-                        slots[i + 1].transform.GetChild(0).SetParent(slots[i].transform);
-                        slots[i].transform.GetChild(slots[i].transform.childCount - 1).GetComponent<RectTransform>().anchoredPosition = Vector3.zero; //Remember Destroy previous child sets in at the end of frame
-                    }
-                    else
-                    {
-                        slots[i].gameObject.SetActive(false);
-                    }
+                    slots[i].gameObject.SetActive(false);
                 }
             }
-        }
-        else
-        {
-            Debug.Log($"Slot {slot.name} passed by the inventory to the UI is invalid!");
         }
     }
 
