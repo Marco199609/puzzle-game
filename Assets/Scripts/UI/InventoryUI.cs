@@ -1,5 +1,6 @@
 using SnowHorse.Utils;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,9 +14,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image itemImagePrefab;
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private Button[] slots;
+    [SerializeField] private Camera _camera;
 
     private Button selectedSlot;
-    private float currentLerpTime;
+
+    private List<Coroutine> movingItems = new List<Coroutine>();
 
     private void Start()
     {
@@ -27,7 +30,11 @@ public class InventoryUI : MonoBehaviour
 
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if (selectedSlot.gameObject == slots[i].gameObject) Inventory.Instance.Select(Inventory.Instance.GetInventoryItems[i]);
+                    if (selectedSlot.gameObject == slots[i].gameObject)
+                    {
+                        Inventory.Instance.Select(Inventory.Instance.GetInventoryItems[i]);
+                        StartCoroutine(MoveItemImageToCursor(slots[i].transform.GetChild(0).GetComponent<RectTransform>(), selectedSlot.gameObject));
+                    }
 
                     slots[i].GetComponent<Image>().enabled = selectedSlot.gameObject == slots[i].gameObject;
                 }
@@ -35,7 +42,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void ShowItem(ItemData item)
+    public void PreviewItem(ItemData item)
     {
         itemName.text = item.Name;
         var image = SetItemUISprite(item);
@@ -44,7 +51,8 @@ public class InventoryUI : MonoBehaviour
         {
             if (!slots[i].gameObject.activeInHierarchy)
             {
-                StartCoroutine(AddToInventoryUI(item, image, slots[i].transform));
+                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform));
+                movingItems.Add(coroutine);
                 return;
             }
         }
@@ -52,9 +60,12 @@ public class InventoryUI : MonoBehaviour
 
     private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot)
     {
+        Inventory.Instance.CanAddItems = false;
         itemUIContainer.SetActive(true);
+        itemName.gameObject.SetActive(true);
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
+        slot.GetComponent<Button>().enabled = false;
         image.transform.SetParent(slot);
 
         if (item.ScaleInPreviewUI != Vector2.zero) image.rectTransform.sizeDelta = item.ScaleInPreviewUI;
@@ -73,14 +84,14 @@ public class InventoryUI : MonoBehaviour
 
         yield return new WaitForSeconds(itemPreviewDuration);
 
-        itemUIContainer.SetActive(false);
+        itemName.gameObject.SetActive(false);
 
-        currentLerpTime = 0;
+        var refLerpTime = 0f;
         float percentage = 0;
 
         while (percentage < 1)
         {
-            percentage = Interpolation.Sinerp(goToSlotDuration, ref currentLerpTime);
+            percentage = Interpolation.Sinerp(goToSlotDuration, ref refLerpTime);
 
             image.transform.position = Vector3.Lerp(startPosition, targetPosition, percentage);
             image.rectTransform.sizeDelta = Vector2.Lerp(startScale, targetScale, percentage);
@@ -89,11 +100,19 @@ public class InventoryUI : MonoBehaviour
             yield return null;
         }
 
+        itemUIContainer.SetActive(false);
+        slot.GetComponent<Button>().enabled = true;
+
+        if(movingItems.Count > 0) movingItems.RemoveAt(0); //Removes this coroutine
+        if(movingItems.Count <= 0) Inventory.Instance.CanAddItems = true; //Checks if no moving items
+
         Debug.Log("Finished moving inventory UI");
     }
 
-    public void RemoveInventoryItem()
+    public IEnumerator RemoveInventoryItem()
     {
+        yield return new WaitUntil(()=>movingItems.Count <= 0);
+
         var removed = false;
 
         for (int i = 0; i < slots.Length; i++)
@@ -117,6 +136,42 @@ public class InventoryUI : MonoBehaviour
                     slots[i].gameObject.SetActive(false);
                 }
             }
+        }
+    }
+
+    public IEnumerator MoveItemImageToCursor(RectTransform image, GameObject slot)
+    {
+        while(image && slot == selectedSlot.gameObject)
+        {
+            Cursor.visible = false;
+
+            slot.GetComponent<Button>().enabled = false;
+            image.GetComponent<Image>().raycastTarget = false;
+
+            var position = new Vector2(
+                _camera.ScreenToViewportPoint(Input.mousePosition).x * Screen.width, 
+                _camera.ScreenToViewportPoint(Input.mousePosition).y * Screen.height);
+
+            image.transform.position = position;
+            yield return null;
+        }
+
+        Cursor.visible = true;
+        slot.GetComponent<Button>().enabled = true;
+
+        if (image)
+        {
+            image.transform.position = slot.transform.position;
+            image.GetComponent<Image>().raycastTarget = true;
+        } 
+    }
+
+    public void DeselectSlot()
+    {
+        if(selectedSlot)
+        {
+            selectedSlot.GetComponent<Image>().enabled = false;
+            selectedSlot = null;
         }
     }
 

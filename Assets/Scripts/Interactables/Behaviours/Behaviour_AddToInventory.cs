@@ -9,6 +9,9 @@ public class Behaviour_AddToInventory : MonoBehaviour, IBehaviour
 
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
-        if(onInteraction && isInspecting || onInspection && isInspecting || onInteraction == isInteracting == onInspection == isInspecting == false) Inventory.Instance.Add(item);
+        if(Inventory.Instance.CanAddItems)
+        {
+            if (onInteraction && isInspecting || onInspection && isInspecting || onInteraction == isInteracting == onInspection == isInspecting == false) Inventory.Instance.Add(item);
+        }
     }
 }

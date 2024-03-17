@@ -1,11 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private Transform usedItemsParent;
     [SerializeField] private List<ItemData> inventory = new List<ItemData>();
     [SerializeField] private ItemData selectedItem;
 
@@ -18,12 +17,13 @@ public class Inventory : MonoBehaviour
     }
 
     public List<ItemData> GetInventoryItems { get => inventory; }
-    public List<ItemData> Set { set => inventory = value; }
-
     public ItemData GetSelected { get => selectedItem; }
+
+    [NonSerialized] public bool CanAddItems = true;
 
     public void Add(ItemData item)
     {
+        Deselect();
         UIController.Instance.ShowInventoryItem(item);
         item.gameObject.SetActive(false);
         item.gameObject.transform.SetParent(transform);
@@ -36,13 +36,19 @@ public class Inventory : MonoBehaviour
         else Debug.Log($"Item {item.Name} does not exist in inventory!");
     }
 
+    public void Deselect()
+    {
+        selectedItem = null;
+        UIController.Instance.DeselectSlot();
+    }
+
     public void UseItem(ItemData item)
     {
         if (inventory.Contains(item))
         {
             if (selectedItem == item) selectedItem = null;
             inventory.Remove(item);
-            Destroy(item.gameObject);
+            item.transform.SetParent(usedItemsParent);
 
             UIController.Instance.RemoveInventoryItem();
         }
