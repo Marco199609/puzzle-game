@@ -69,19 +69,20 @@ public class InventoryUI : MonoBehaviour
         {
             if (!slots[i].gameObject.activeInHierarchy)
             {
-                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform));
+                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: false));
                 movingItems.Add(coroutine);
                 return;
             }
         }
     }
 
-    private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot)
+    private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot, bool previewItem = true)
     {
         Inventory.Instance.CanAddItems = false;
         itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(inventorySlotsContainer.GetComponent<RectTransform>());
         slot.GetComponent<Button>().enabled = false;
         
         if (item.ScaleInPreviewUI != Vector2.zero) image.rectTransform.sizeDelta = item.ScaleInPreviewUI;
@@ -90,7 +91,9 @@ public class InventoryUI : MonoBehaviour
         if(item.ScaleInInventoryUI == Vector2.zero) Debug.Log("Please set item UI inventory scale!");
         ModifyBackgroundWidth(true);
 
-        yield return StartCoroutine(GoToUIPosition(
+        if(previewItem)
+        {
+            yield return StartCoroutine(GoToUIPosition(
             image: image,
             startScale: item.transform.localScale * 100,
             targetScale: item.ScaleInPreviewUI,
@@ -100,26 +103,44 @@ public class InventoryUI : MonoBehaviour
             refLerpTime: 0f,
             percentage: 0f,
             startPosition: new Vector2(
-                _camera.ScreenToViewportPoint(Input.mousePosition).x * Screen.width - (Screen.width / 2),
-                _camera.ScreenToViewportPoint(Input.mousePosition).y * Screen.height - (Screen.height / 2))
-            ));
+                _camera.WorldToScreenPoint(item.gameObject.transform.position).x - image.transform.parent.GetComponent<RectTransform>().position.x,
+                _camera.WorldToScreenPoint(item.gameObject.transform.position).y - image.transform.parent.GetComponent<RectTransform>().position.y)));
 
-        yield return new WaitForSeconds(itemPreviewDuration);
-        image.transform.SetParent(slot);
+            yield return new WaitForSeconds(itemPreviewDuration);
 
-        yield return StartCoroutine(GoToUIPosition(
-            image: image,
-            startScale: item.ScaleInPreviewUI,
-            targetScale: item.ScaleInInventoryUI,
-            startRotation: image.transform.rotation,
-            targetRotation: Quaternion.Euler(item.RotationInInventory),
-            duration: goToSlotDuration,
-            refLerpTime: 0f,
-            percentage: 0f,
-            startPosition: image.rectTransform.anchoredPosition
-            ));
+            image.transform.SetParent(slot);
+            itemPreviewUIContainer.SetActive(false);
 
-        itemPreviewUIContainer.SetActive(false);
+            yield return StartCoroutine(GoToUIPosition(
+                image: image,
+                startScale: item.ScaleInPreviewUI,
+                targetScale: item.ScaleInInventoryUI,
+                startRotation: image.transform.rotation,
+                targetRotation: Quaternion.Euler(item.RotationInInventory),
+                duration: goToSlotDuration,
+                refLerpTime: 0f,
+                percentage: 0f,
+                startPosition: image.rectTransform.anchoredPosition));
+        }
+        else
+        {
+            image.transform.SetParent(slot);
+            itemPreviewUIContainer.SetActive(false);
+
+            yield return StartCoroutine(GoToUIPosition(
+               image: image,
+               startScale: item.transform.localScale * 100,
+               targetScale: item.ScaleInInventoryUI,
+               startRotation: image.transform.rotation,
+               targetRotation: Quaternion.Euler(item.RotationInInventory),
+               duration: goToSlotDuration,
+               refLerpTime: 0f,
+               percentage: 0f,
+               startPosition: new Vector2(
+                _camera.WorldToScreenPoint(item.gameObject.transform.position).x - image.transform.parent.GetComponent<RectTransform>().position.x,
+                _camera.WorldToScreenPoint(item.gameObject.transform.position).y - image.transform.parent.GetComponent<RectTransform>().position.y)));
+        }
+
         slot.GetComponent<Button>().enabled = true;
 
         if(movingItems.Count > 0) movingItems.RemoveAt(0); //Removes this coroutine
