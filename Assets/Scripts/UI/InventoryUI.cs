@@ -19,6 +19,8 @@ public class InventoryUI : MonoBehaviour
     private Button selectedSlot;
     private List<Coroutine> movingItems = new List<Coroutine>();
 
+    public Button[] GetSlots { get => slots; }
+
     private void Start()
     {
         foreach(var slot in slots)

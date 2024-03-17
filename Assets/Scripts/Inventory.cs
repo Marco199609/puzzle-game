@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private Transform usedItemsParent;
 
+    private int maxInventoryCount;
     private List<ItemData> inventory = new List<ItemData>();
     private ItemData selectedItem;
     private InventoryUI inventoryUI;
@@ -19,6 +20,7 @@ public class Inventory : MonoBehaviour
         else Destroy(this);
 
         inventoryUI = GetComponent<InventoryUI>();
+        maxInventoryCount = inventoryUI.GetSlots.Length;
     }
 
     public List<ItemData> GetInventoryItems { get => inventory; }
@@ -28,11 +30,19 @@ public class Inventory : MonoBehaviour
 
     public void Add(ItemData item)
     {
-        Deselect();
-        inventoryUI.PreviewItem(item);
-        item.gameObject.SetActive(false);
-        item.gameObject.transform.SetParent(transform);
-        inventory.Add(item);
+        if(inventory.Count < maxInventoryCount)
+        {
+            Deselect();
+            inventoryUI.PreviewItem(item);
+            item.gameObject.SetActive(false);
+            item.gameObject.transform.SetParent(transform);
+            inventory.Add(item);
+        }
+        else
+        {
+            Debug.Log("Inventory full!");
+        }
+
     }
 
     public void Select(ItemData item)
