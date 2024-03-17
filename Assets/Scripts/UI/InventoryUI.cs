@@ -66,23 +66,25 @@ public class InventoryUI : MonoBehaviour
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
         slot.GetComponent<Button>().enabled = false;
-        image.transform.SetParent(slot);
+        
 
         if (item.ScaleInPreviewUI != Vector2.zero) image.rectTransform.sizeDelta = item.ScaleInPreviewUI;
         else Debug.Log("Please set item UI preview scale!");
 
         if(item.ScaleInInventoryUI == Vector2.zero) Debug.Log("Please set item UI inventory scale!");
 
-        var startPosition = image.transform.position;
-        var targetPosition = slot.transform.position;
+        yield return new WaitForSeconds(itemPreviewDuration);
+
+        image.transform.SetParent(slot);
+
+        var startPosition = image.rectTransform.anchoredPosition;
+        var targetPosition = Vector3.zero;
 
         var startScale = item.ScaleInPreviewUI;
         var targetScale = item.ScaleInInventoryUI;
 
         var startRotation = image.transform.rotation;
         var targetRotation = Quaternion.Euler(item.RotationInInventory);
-
-        yield return new WaitForSeconds(itemPreviewDuration);
 
         itemName.gameObject.SetActive(false);
 
@@ -93,7 +95,7 @@ public class InventoryUI : MonoBehaviour
         {
             percentage = Interpolation.Sinerp(goToSlotDuration, ref refLerpTime);
 
-            image.transform.position = Vector3.Lerp(startPosition, targetPosition, percentage);
+            image.rectTransform.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, percentage);
             image.rectTransform.sizeDelta = Vector2.Lerp(startScale, targetScale, percentage);
             image.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, percentage);
 
