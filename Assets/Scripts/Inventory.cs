@@ -2,18 +2,22 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InventoryUI))]
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private Transform usedItemsParent;
     [SerializeField] private List<ItemData> inventory = new List<ItemData>();
     [SerializeField] private ItemData selectedItem;
 
+    InventoryUI inventoryUI;
     public static Inventory Instance;
 
     private void Awake()
     {
         if (!Instance) Instance = this;
         else Destroy(this);
+
+        inventoryUI = GetComponent<InventoryUI>();
     }
 
     public List<ItemData> GetInventoryItems { get => inventory; }
@@ -24,7 +28,7 @@ public class Inventory : MonoBehaviour
     public void Add(ItemData item)
     {
         Deselect();
-        UIController.Instance.ShowInventoryItem(item);
+        inventoryUI.PreviewItem(item);
         item.gameObject.SetActive(false);
         item.gameObject.transform.SetParent(transform);
         inventory.Add(item);
@@ -39,7 +43,7 @@ public class Inventory : MonoBehaviour
     public void Deselect()
     {
         selectedItem = null;
-        UIController.Instance.DeselectSlot();
+        inventoryUI.DeselectSlot();
     }
 
     public void UseItem(ItemData item)
@@ -50,7 +54,7 @@ public class Inventory : MonoBehaviour
             inventory.Remove(item);
             item.transform.SetParent(usedItemsParent);
 
-            UIController.Instance.RemoveInventoryItem();
+            StartCoroutine(inventoryUI.RemoveInventoryItem());
         }
         else Debug.Log($"Item {item.Name} does not exist in inventory!");
     }

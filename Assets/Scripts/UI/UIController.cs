@@ -24,21 +24,4 @@ public class UIController : MonoBehaviour
         Cursor.SetCursor(cursor, new Vector2(cursor.height / 2, cursor.width / 2), CursorMode.Auto);
     }
     #endregion
-
-    #region Inventory
-    public void ShowInventoryItem(ItemData item)
-    {
-        inventoryUI.PreviewItem(item);
-    }
-
-    public void RemoveInventoryItem()
-    {
-        StartCoroutine(inventoryUI.RemoveInventoryItem());
-    }
-
-    public void DeselectSlot()
-    {
-        inventoryUI.DeselectSlot();
-    }
-    #endregion
 }

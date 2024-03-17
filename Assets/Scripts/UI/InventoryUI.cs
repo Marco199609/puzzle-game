@@ -17,28 +17,29 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Camera _camera;
 
     private Button selectedSlot;
-
     private List<Coroutine> movingItems = new List<Coroutine>();
 
     private void Start()
     {
         foreach(var slot in slots)
         {
-            slot.onClick.AddListener(() =>
+            slot.onClick.AddListener(() => { SelectSlot(); });
+        }
+    }
+
+    private void SelectSlot()
+    {
+        selectedSlot = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (selectedSlot.gameObject == slots[i].gameObject)
             {
-                selectedSlot = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+                Inventory.Instance.Select(Inventory.Instance.GetInventoryItems[i]);
+                StartCoroutine(MoveItemImageToCursor(slots[i].transform.GetChild(0).GetComponent<RectTransform>(), selectedSlot.gameObject));
+            }
 
-                for (int i = 0; i < slots.Length; i++)
-                {
-                    if (selectedSlot.gameObject == slots[i].gameObject)
-                    {
-                        Inventory.Instance.Select(Inventory.Instance.GetInventoryItems[i]);
-                        StartCoroutine(MoveItemImageToCursor(slots[i].transform.GetChild(0).GetComponent<RectTransform>(), selectedSlot.gameObject));
-                    }
-
-                    slots[i].GetComponent<Image>().enabled = selectedSlot.gameObject == slots[i].gameObject;
-                }
-            });
+            slots[i].GetComponent<Image>().enabled = selectedSlot.gameObject == slots[i].gameObject;
         }
     }
 
@@ -67,7 +68,6 @@ public class InventoryUI : MonoBehaviour
         slot.gameObject.SetActive(true);
         slot.GetComponent<Button>().enabled = false;
         
-
         if (item.ScaleInPreviewUI != Vector2.zero) image.rectTransform.sizeDelta = item.ScaleInPreviewUI;
         else Debug.Log("Please set item UI preview scale!");
 
@@ -78,27 +78,21 @@ public class InventoryUI : MonoBehaviour
         image.transform.SetParent(slot);
 
         var startPosition = image.rectTransform.anchoredPosition;
-        var targetPosition = Vector3.zero;
-
         var startScale = item.ScaleInPreviewUI;
         var targetScale = item.ScaleInInventoryUI;
-
         var startRotation = image.transform.rotation;
         var targetRotation = Quaternion.Euler(item.RotationInInventory);
+        var refLerpTime = 0f;
+        var percentage = 0f;
 
         itemName.gameObject.SetActive(false);
-
-        var refLerpTime = 0f;
-        float percentage = 0;
 
         while (percentage < 1)
         {
             percentage = Interpolation.Sinerp(goToSlotDuration, ref refLerpTime);
-
-            image.rectTransform.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, percentage);
+            image.rectTransform.anchoredPosition = Vector3.Lerp(startPosition, Vector3.zero, percentage);
             image.rectTransform.sizeDelta = Vector2.Lerp(startScale, targetScale, percentage);
             image.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, percentage);
-
             yield return null;
         }
 
@@ -106,7 +100,7 @@ public class InventoryUI : MonoBehaviour
         slot.GetComponent<Button>().enabled = true;
 
         if(movingItems.Count > 0) movingItems.RemoveAt(0); //Removes this coroutine
-        if(movingItems.Count <= 0) Inventory.Instance.CanAddItems = true; //Checks if no moving items
+        if(movingItems.Count <= 0) Inventory.Instance.CanAddItems = true;
 
         Debug.Log("Finished moving inventory UI");
     }
@@ -114,7 +108,6 @@ public class InventoryUI : MonoBehaviour
     public IEnumerator RemoveInventoryItem()
     {
         yield return new WaitUntil(()=>movingItems.Count <= 0);
-
         var removed = false;
 
         for (int i = 0; i < slots.Length; i++)
@@ -146,7 +139,6 @@ public class InventoryUI : MonoBehaviour
         while(image && slot == selectedSlot.gameObject)
         {
             Cursor.visible = false;
-
             slot.GetComponent<Button>().enabled = false;
             image.GetComponent<Image>().raycastTarget = false;
 
@@ -183,7 +175,6 @@ public class InventoryUI : MonoBehaviour
         image.sprite = item.Sprite;
         image.color = item.Color;
         image.preserveAspect = preserveAspect;
-
         return image;
     }
 }
