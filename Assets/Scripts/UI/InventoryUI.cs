@@ -13,10 +13,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private float goToSlotDuration = 0.7f;
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject inventoryUIContainer;
+    [SerializeField] private GameObject inventorySlotsContainer;
     [SerializeField] private GameObject inventoryUIBackground;
     [SerializeField] private GameObject itemPreviewUIContainer;
     [SerializeField] private Image itemImagePrefab;
-    [SerializeField] private Button closeInventoryButton;
+    [SerializeField] private Button openInventoryButton;
     [SerializeField] private Button[] slots;
 
     private Button selectedSlot;
@@ -33,10 +34,14 @@ public class InventoryUI : MonoBehaviour
             slot.gameObject.SetActive(false);
         }
 
-        closeInventoryButton.onClick.AddListener(()=>
+        openInventoryButton.onClick.AddListener(() =>
         {
-            inventoryUIContainer.SetActive(false);
+            inventoryUIContainer.SetActive(!inventoryUIContainer.activeInHierarchy);
+            Inventory.Instance.DeselectPreviousItem();
         });
+
+        inventoryUIContainer.SetActive(false);
+        ModifyBackgroundWidth(false);
     }
 
     private void SelectSlot()
@@ -83,6 +88,7 @@ public class InventoryUI : MonoBehaviour
         else Debug.Log("Please set item UI preview scale!");
 
         if(item.ScaleInInventoryUI == Vector2.zero) Debug.Log("Please set item UI inventory scale!");
+        ModifyBackgroundWidth(true);
 
         yield return StartCoroutine(GoToUIPosition(
             image: image,
@@ -159,7 +165,33 @@ public class InventoryUI : MonoBehaviour
                 {
                     slots[i].gameObject.SetActive(false);
                 }
+
+                ModifyBackgroundWidth(false);
             }
+        }
+    }
+
+    private void ModifyBackgroundWidth(bool isAddingItem)
+    {
+        var rectTransform = inventoryUIBackground.GetComponent<RectTransform>();
+        var layoutGroup = inventorySlotsContainer.GetComponent<HorizontalLayoutGroup>();
+
+        var countPadding = isAddingItem ? 1 : 0;
+
+        if(Inventory.Instance.GetInventoryItems.Count > 0)
+        {
+            rectTransform.sizeDelta = new Vector2(
+                slots[0].GetComponent<RectTransform>().sizeDelta.x * (Inventory.Instance.GetInventoryItems.Count + countPadding) +
+                layoutGroup.spacing * (Inventory.Instance.GetInventoryItems.Count - 1) +
+                layoutGroup.padding.right + layoutGroup.padding.left,
+                rectTransform.sizeDelta.y);
+        }
+        else
+        {
+            rectTransform.sizeDelta = new Vector2(
+                slots[0].GetComponent<RectTransform>().sizeDelta.x +
+                layoutGroup.padding.right + layoutGroup.padding.left,
+                rectTransform.sizeDelta.y);
         }
     }
 
