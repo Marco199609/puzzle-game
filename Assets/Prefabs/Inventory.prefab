@@ -90,12 +90,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf463f2be200e54182ceb3fe0afda40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goToPreviewDuration: 0.5
-  itemPreviewDuration: 0.1
+  goToPreviewDuration: 0.7
+  itemPreviewDuration: 0.3
   goToSlotDuration: 0.7
   _camera: {fileID: 0}
-  itemUIContainer: {fileID: 0}
+  inventoryUIContainer: {fileID: 0}
+  inventorySlotsContainer: {fileID: 0}
+  inventoryUIBackground: {fileID: 0}
+  itemPreviewUIContainer: {fileID: 0}
   itemImagePrefab: {fileID: 0}
+  openInventoryButton: {fileID: 0}
   slots:
   - {fileID: 0}
   - {fileID: 0}

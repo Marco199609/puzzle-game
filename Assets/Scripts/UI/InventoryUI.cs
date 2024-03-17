@@ -69,7 +69,7 @@ public class InventoryUI : MonoBehaviour
         {
             if (!slots[i].gameObject.activeInHierarchy)
             {
-                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: false));
+                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: true));
                 movingItems.Add(coroutine);
                 return;
             }

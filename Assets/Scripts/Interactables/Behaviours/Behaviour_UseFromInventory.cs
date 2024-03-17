@@ -1,4 +1,5 @@
 using SnowHorse.Utils;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
         RequireItems();
-        Result();
     }
 
     private void RequireItems()
@@ -23,10 +23,17 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour
                 break;
             }
         }
+
+        if(requiredItems.Count <= 0 )
+        {
+            StartCoroutine(Result());
+        }
     }
 
-    private void Result()
+    private IEnumerator Result()
     {
+        yield return new WaitForSecondsRealtime(0.1f);
+
         if(resultingBehaviours.Count <= 0)
         {
             WarningTool.Print("There are no resulting behaviours on:", gameObject);
