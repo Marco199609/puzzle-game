@@ -12,8 +12,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private float itemPreviewDuration = 0.3f;
     [SerializeField] private float goToSlotDuration = 0.7f;
     [SerializeField] private Camera _camera;
-    [SerializeField] private GameObject itemUIContainer;
+    [SerializeField] private GameObject inventoryUIContainer;
+    [SerializeField] private GameObject inventoryUIBackground;
+    [SerializeField] private GameObject itemPreviewUIContainer;
     [SerializeField] private Image itemImagePrefab;
+    [SerializeField] private Button closeInventoryButton;
     [SerializeField] private Button[] slots;
 
     private Button selectedSlot;
@@ -29,6 +32,11 @@ public class InventoryUI : MonoBehaviour
             slot.GetComponent<Image>().enabled = false;
             slot.gameObject.SetActive(false);
         }
+
+        closeInventoryButton.onClick.AddListener(()=>
+        {
+            inventoryUIContainer.SetActive(false);
+        });
     }
 
     private void SelectSlot()
@@ -49,6 +57,7 @@ public class InventoryUI : MonoBehaviour
 
     public void PreviewItem(ItemData item)
     {
+        inventoryUIContainer.SetActive(true);
         var image = SetItemUISprite(item);
 
         for (int i = 0; i < slots.Length; i++)
@@ -65,7 +74,7 @@ public class InventoryUI : MonoBehaviour
     private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot)
     {
         Inventory.Instance.CanAddItems = false;
-        itemUIContainer.SetActive(true);
+        itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
         slot.GetComponent<Button>().enabled = false;
@@ -104,7 +113,7 @@ public class InventoryUI : MonoBehaviour
             startPosition: image.rectTransform.anchoredPosition
             ));
 
-        itemUIContainer.SetActive(false);
+        itemPreviewUIContainer.SetActive(false);
         slot.GetComponent<Button>().enabled = true;
 
         if(movingItems.Count > 0) movingItems.RemoveAt(0); //Removes this coroutine
