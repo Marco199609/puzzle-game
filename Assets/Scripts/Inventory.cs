@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
     {
         if(inventory.Count < maxInventoryCount)
         {
-            Deselect();
+            DeselectPreviousItem();
             inventoryUI.PreviewItem(item);
             item.gameObject.SetActive(false);
             item.gameObject.transform.SetParent(transform);
@@ -51,7 +51,7 @@ public class Inventory : MonoBehaviour
         else Debug.Log($"Item {item.Name} does not exist in inventory!");
     }
 
-    public void Deselect()
+    public void DeselectPreviousItem()
     {
         selectedItem = null;
         inventoryUI.DeselectSlot();

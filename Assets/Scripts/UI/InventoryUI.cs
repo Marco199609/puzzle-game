@@ -26,6 +26,8 @@ public class InventoryUI : MonoBehaviour
         foreach(var slot in slots)
         {
             slot.onClick.AddListener(() => { SelectSlot(); });
+            slot.GetComponent<Image>().enabled = false;
+            slot.gameObject.SetActive(false);
         }
     }
 
