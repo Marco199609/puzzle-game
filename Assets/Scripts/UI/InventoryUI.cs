@@ -78,7 +78,7 @@ public class InventoryUI : MonoBehaviour
 
     private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot, bool previewItem = true)
     {
-        Inventory.Instance.CanAddItems = false;
+        //Inventory.Instance.CanAddItems = false;
         itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
@@ -109,7 +109,7 @@ public class InventoryUI : MonoBehaviour
             yield return new WaitForSeconds(itemPreviewDuration);
 
             image.transform.SetParent(slot);
-            itemPreviewUIContainer.SetActive(false);
+            //itemPreviewUIContainer.SetActive(false);
 
             yield return StartCoroutine(GoToUIPosition(
                 image: image,
@@ -125,7 +125,7 @@ public class InventoryUI : MonoBehaviour
         else
         {
             image.transform.SetParent(slot);
-            itemPreviewUIContainer.SetActive(false);
+            //itemPreviewUIContainer.SetActive(false);
 
             yield return StartCoroutine(GoToUIPosition(
                image: image,
@@ -144,7 +144,7 @@ public class InventoryUI : MonoBehaviour
         slot.GetComponent<Button>().enabled = true;
 
         if(movingItems.Count > 0) movingItems.RemoveAt(0); //Removes this coroutine
-        if(movingItems.Count <= 0) Inventory.Instance.CanAddItems = true;
+        if(movingItems.Count <= 0) itemPreviewUIContainer.SetActive(false);//Inventory.Instance.CanAddItems = true;
 
         Debug.Log("Finished moving inventory UI");
     }
