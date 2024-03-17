@@ -10,11 +10,11 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private float itemPreviewDuration = 1.0f;
     [SerializeField] private float goToSlotDuration = 1f;
+    [SerializeField] private Camera _camera;
     [SerializeField] private GameObject itemUIContainer;
     [SerializeField] private Image itemImagePrefab;
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private Button[] slots;
-    [SerializeField] private Camera _camera;
 
     private Button selectedSlot;
     private List<Coroutine> movingItems = new List<Coroutine>();
@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
             if (selectedSlot.gameObject == slots[i].gameObject)
             {
                 Inventory.Instance.Select(Inventory.Instance.GetInventoryItems[i]);
-                StartCoroutine(MoveItemImageToCursor(slots[i].transform.GetChild(0).GetComponent<RectTransform>(), selectedSlot.gameObject));
+                StartCoroutine(MoveItemImageToCursor(slots[i].transform.GetChild(0).GetComponent<Image>(), selectedSlot.gameObject));
             }
 
             slots[i].GetComponent<Image>().enabled = selectedSlot.gameObject == slots[i].gameObject;
@@ -134,14 +134,16 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveItemImageToCursor(RectTransform image, GameObject slot)
+    public IEnumerator MoveItemImageToCursor(Image image, GameObject slot)
     {
-        while(image && slot == selectedSlot.gameObject)
-        {
-            Cursor.visible = false;
-            slot.GetComponent<Button>().enabled = false;
-            image.GetComponent<Image>().raycastTarget = false;
+        var slotButton = slot.GetComponent<Button>();
 
+        slotButton.enabled = false;
+        image.raycastTarget = false;
+        Cursor.visible = false;
+
+        while (image && selectedSlot && slot == selectedSlot.gameObject)
+        {
             var position = new Vector2(
                 _camera.ScreenToViewportPoint(Input.mousePosition).x * Screen.width, 
                 _camera.ScreenToViewportPoint(Input.mousePosition).y * Screen.height);
@@ -150,14 +152,15 @@ public class InventoryUI : MonoBehaviour
             yield return null;
         }
 
-        Cursor.visible = true;
-        slot.GetComponent<Button>().enabled = true;
+        slotButton.enabled = true;
 
         if (image)
         {
             image.transform.position = slot.transform.position;
-            image.GetComponent<Image>().raycastTarget = true;
-        } 
+            image.raycastTarget = true;
+        }
+
+        Cursor.visible = true;
     }
 
     public void DeselectSlot()

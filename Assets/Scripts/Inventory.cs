@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(InventoryUI))]
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private Transform usedItemsParent;
     [SerializeField] private List<ItemData> inventory = new List<ItemData>();
     [SerializeField] private ItemData selectedItem;
+    [SerializeField] private Transform usedItemsParent;
 
     InventoryUI inventoryUI;
     public static Inventory Instance;

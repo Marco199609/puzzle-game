@@ -7,7 +7,6 @@ public class UIController : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] private Texture2D cross;
     [SerializeField] private Texture2D circle;
-    [SerializeField] private InventoryUI inventoryUI;
 
     public static UIController Instance;
 

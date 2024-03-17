@@ -1102,8 +1102,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 839451931}
-  - component: {fileID: 839451933}
   - component: {fileID: 839451932}
+  - component: {fileID: 839451933}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -1139,9 +1139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165558f780faad44fbcc5f1472be13ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usedItemsParent: {fileID: 1153366445}
   inventory: []
   selectedItem: {fileID: 0}
+  usedItemsParent: {fileID: 1153366445}
 --- !u!114 &839451933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,8 +1154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf463f2be200e54182ceb3fe0afda40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPreviewDuration: 1
-  goToSlotDuration: 1
+  itemPreviewDuration: 0.7
+  goToSlotDuration: 0.7
+  _camera: {fileID: 519420031}
   itemUIContainer: {fileID: 153052121}
   itemImagePrefab: {fileID: 512698527}
   itemName: {fileID: 727699033}
@@ -1168,7 +1169,6 @@ MonoBehaviour:
   - {fileID: 520741764}
   - {fileID: 100712971}
   - {fileID: 207824289}
-  _camera: {fileID: 519420031}
 --- !u!114 &868532932 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3654889652744752335, guid: 78734dde802fa0e4b80ca3b7ba82db3d, type: 3}
@@ -2165,7 +2165,6 @@ MonoBehaviour:
   mainCanvas: {fileID: 1795020776}
   cross: {fileID: 2800000, guid: 161ca6fbe62827b40ac3c379e9d2556b, type: 3}
   circle: {fileID: 2800000, guid: 7a31c5b0873ce3b49b87257522210edd, type: 3}
-  inventoryUI: {fileID: 839451933}
 --- !u!114 &1993028267 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5401077425663573234, guid: 78734dde802fa0e4b80ca3b7ba82db3d, type: 3}
