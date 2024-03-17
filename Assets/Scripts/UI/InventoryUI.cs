@@ -8,12 +8,12 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private float itemPreviewDuration = 1.0f;
-    [SerializeField] private float goToSlotDuration = 1f;
+    [SerializeField] private float goToPreviewDuration = 0.5f;
+    [SerializeField] private float itemPreviewDuration = 0.3f;
+    [SerializeField] private float goToSlotDuration = 0.7f;
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject itemUIContainer;
     [SerializeField] private Image itemImagePrefab;
-    [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private Button[] slots;
 
     private Button selectedSlot;
@@ -45,7 +45,6 @@ public class InventoryUI : MonoBehaviour
 
     public void PreviewItem(ItemData item)
     {
-        itemName.text = item.Name;
         var image = SetItemUISprite(item);
 
         for (int i = 0; i < slots.Length; i++)
@@ -63,7 +62,6 @@ public class InventoryUI : MonoBehaviour
     {
         Inventory.Instance.CanAddItems = false;
         itemUIContainer.SetActive(true);
-        itemName.gameObject.SetActive(true);
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
         slot.GetComponent<Button>().enabled = false;
@@ -73,28 +71,34 @@ public class InventoryUI : MonoBehaviour
 
         if(item.ScaleInInventoryUI == Vector2.zero) Debug.Log("Please set item UI inventory scale!");
 
-        yield return new WaitForSeconds(itemPreviewDuration);
+        yield return StartCoroutine(GoToUIPosition(
+            image: image,
+            startScale: item.transform.localScale * 100,
+            targetScale: item.ScaleInPreviewUI,
+            startRotation: item.transform.rotation,
+            targetRotation: Quaternion.Euler(item.RotationInPreviewUI),
+            duration: goToPreviewDuration,
+            refLerpTime: 0f,
+            percentage: 0f,
+            startPosition: new Vector2(
+                _camera.ScreenToViewportPoint(Input.mousePosition).x * Screen.width - (Screen.width / 2),
+                _camera.ScreenToViewportPoint(Input.mousePosition).y * Screen.height - (Screen.height / 2))
+            ));
 
+        yield return new WaitForSeconds(itemPreviewDuration);
         image.transform.SetParent(slot);
 
-        var startPosition = image.rectTransform.anchoredPosition;
-        var startScale = item.ScaleInPreviewUI;
-        var targetScale = item.ScaleInInventoryUI;
-        var startRotation = image.transform.rotation;
-        var targetRotation = Quaternion.Euler(item.RotationInInventory);
-        var refLerpTime = 0f;
-        var percentage = 0f;
-
-        itemName.gameObject.SetActive(false);
-
-        while (percentage < 1)
-        {
-            percentage = Interpolation.Sinerp(goToSlotDuration, ref refLerpTime);
-            image.rectTransform.anchoredPosition = Vector3.Lerp(startPosition, Vector3.zero, percentage);
-            image.rectTransform.sizeDelta = Vector2.Lerp(startScale, targetScale, percentage);
-            image.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, percentage);
-            yield return null;
-        }
+        yield return StartCoroutine(GoToUIPosition(
+            image: image,
+            startScale: item.ScaleInPreviewUI,
+            targetScale: item.ScaleInInventoryUI,
+            startRotation: image.transform.rotation,
+            targetRotation: Quaternion.Euler(item.RotationInInventory),
+            duration: goToSlotDuration,
+            refLerpTime: 0f,
+            percentage: 0f,
+            startPosition: image.rectTransform.anchoredPosition
+            ));
 
         itemUIContainer.SetActive(false);
         slot.GetComponent<Button>().enabled = true;
@@ -103,6 +107,18 @@ public class InventoryUI : MonoBehaviour
         if(movingItems.Count <= 0) Inventory.Instance.CanAddItems = true;
 
         Debug.Log("Finished moving inventory UI");
+    }
+
+    private IEnumerator GoToUIPosition(float percentage, float refLerpTime, Image image, Vector3 startPosition, Vector3 startScale, Vector3 targetScale, Quaternion startRotation, Quaternion targetRotation, float duration)
+    {
+        while (percentage < 1)
+        {
+            percentage = Interpolation.Sinerp(duration, ref refLerpTime);
+            image.rectTransform.anchoredPosition = Vector3.Lerp(startPosition, Vector3.zero, percentage);
+            image.rectTransform.sizeDelta = Vector2.Lerp(startScale, targetScale, percentage);
+            image.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, percentage);
+            yield return null;
+        }
     }
 
     public IEnumerator RemoveInventoryItem()

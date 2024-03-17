@@ -175,6 +175,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 150, y: 150}
+  <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
 --- !u!114 &49695893
@@ -377,6 +378,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 150, y: 150}
+  <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
 --- !u!114 &160697214
@@ -764,6 +766,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 150, y: 150}
+  <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
 --- !u!114 &400767081
@@ -901,17 +904,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6931636023731595694, guid: 78734dde802fa0e4b80ca3b7ba82db3d, type: 3}
   m_PrefabInstance: {fileID: 5683454570055104965}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &727699033 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1515503971328599442, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
-  m_PrefabInstance: {fileID: 3558543677581386844}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &754052948
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +956,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 150, y: 150}
+  <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
 --- !u!114 &754052951
@@ -1139,8 +1132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165558f780faad44fbcc5f1472be13ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: []
-  selectedItem: {fileID: 0}
   usedItemsParent: {fileID: 1153366445}
 --- !u!114 &839451933
 MonoBehaviour:
@@ -1154,12 +1145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf463f2be200e54182ceb3fe0afda40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPreviewDuration: 0.7
+  goToPreviewDuration: 0.5
+  itemPreviewDuration: 0.1
   goToSlotDuration: 0.7
   _camera: {fileID: 519420031}
   itemUIContainer: {fileID: 153052121}
   itemImagePrefab: {fileID: 512698527}
-  itemName: {fileID: 727699033}
   slots:
   - {fileID: 1037521990}
   - {fileID: 868532932}
@@ -1370,6 +1361,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 150, y: 150}
+  <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
 --- !u!114 &1127974163
@@ -1582,6 +1574,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 150, y: 150}
+  <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
 --- !u!114 &1343336063
@@ -2184,6 +2177,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1795020777}
     m_Modifications:
+    - target: {fileID: 273791070929246812, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 347
+      objectReference: {fileID: 0}
     - target: {fileID: 292177012820230184, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2264,9 +2261,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895937417607638256, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6523976246456345777, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6751317691617385398, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
       propertyPath: m_Name
       value: Item Preview UI Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 6751317691617385398, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704214619850235503, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

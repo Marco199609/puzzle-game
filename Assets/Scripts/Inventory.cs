@@ -5,11 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(InventoryUI))]
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<ItemData> inventory = new List<ItemData>();
-    [SerializeField] private ItemData selectedItem;
     [SerializeField] private Transform usedItemsParent;
 
-    InventoryUI inventoryUI;
+    private List<ItemData> inventory = new List<ItemData>();
+    private ItemData selectedItem;
+    private InventoryUI inventoryUI;
+
     public static Inventory Instance;
 
     private void Awake()
