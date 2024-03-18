@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 49695892}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &49695894
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1674411151}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!1 &998935885
@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 998935887}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &998935889
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1157830252}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1157830254
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1257928064}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1257928066
@@ -1397,7 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1358576325}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1358576327
@@ -1796,7 +1796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1718058002}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1718058004
@@ -2305,7 +2305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 2114102565}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &2114102567
@@ -2487,7 +2487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 2133828649}
-  previewInUI: 1
+  previewInUI: 0
   onInteraction: 0
   onInspection: 1
 --- !u!114 &2133828651
@@ -2657,6 +2657,18 @@ PrefabInstance:
       propertyPath: itemImagePrefab
       value: 
       objectReference: {fileID: 512698527}
+    - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
+      propertyPath: goToSlotDuration
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
+      propertyPath: goToPreviewDuration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
+      propertyPath: itemPreviewDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
       propertyPath: openInventoryButton
       value: 

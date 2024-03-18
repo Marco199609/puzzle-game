@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private float goToPreviewDuration = 0.5f;
-    [SerializeField] private float itemPreviewDuration = 0.3f;
-    [SerializeField] private float goToSlotDuration = 0.7f;
+    [SerializeField] private float goToPreviewDuration = 0.4f;
+    [SerializeField] private float itemPreviewDuration = 0.2f;
+    [SerializeField] private float goToSlotDuration = 0.6f;
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject inventoryUIContainer;
     [SerializeField] private GameObject inventorySlotsContainer;
@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Button openInventoryButton;
     [SerializeField] private Button[] slots;
 
+    private float goToPreviewMultiplier = 1000f;
     private Button selectedSlot;
     private List<Coroutine> movingItems = new List<Coroutine>();
 
@@ -41,6 +42,8 @@ public class InventoryUI : MonoBehaviour
 
         inventoryUIContainer.SetActive(false);
         ModifyBackgroundWidth(false);
+
+        goToPreviewDuration *= goToPreviewMultiplier;
     }
 
     private void SelectSlot()
@@ -75,7 +78,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot, bool previewItem = true)
+    private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot, bool previewItem)
     {
         itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
@@ -89,22 +92,28 @@ public class InventoryUI : MonoBehaviour
         if(item.ScaleInInventoryUI == Vector2.zero) Debug.Log("Please set item UI inventory scale!");
         ModifyBackgroundWidth(true);
 
-        if(previewItem)
+        if(!previewItem) image.transform.SetParent(slot);
+        var parentRect = image.transform.parent.GetComponent<RectTransform>();
+        var imageRect = image.GetComponent<RectTransform>();
+        var startScale = SpritePixelSize.Get(item.GetComponent<SpriteRenderer>(), _camera);
+        var startPosition = new Vector2(
+                    _camera.WorldToScreenPoint(item.gameObject.transform.position).x - parentRect.position.x,
+                    _camera.WorldToScreenPoint(item.gameObject.transform.position).y - parentRect.position.y);
+
+        if (previewItem)
         {
             yield return StartCoroutine(GoToUIPosition(
                 image: image,
-                startScale: SpritePixelSize.Get(item.GetComponent<SpriteRenderer>(), _camera), //item.transform.localScale * 100,
+                startScale: startScale,
                 targetScale: item.ScaleInPreviewUI,
                 startRotation: item.transform.rotation,
                 targetRotation: Quaternion.Euler(item.RotationInPreviewUI),
-                duration: goToPreviewDuration,
+                duration: goToPreviewDuration / imageRect.position.magnitude,
                 refLerpTime: 0f,
                 percentage: 0f,
-                startPosition: new Vector2(
-                    _camera.WorldToScreenPoint(item.gameObject.transform.position).x - image.transform.parent.GetComponent<RectTransform>().position.x,
-                    _camera.WorldToScreenPoint(item.gameObject.transform.position).y - image.transform.parent.GetComponent<RectTransform>().position.y)));
+                startPosition: startPosition));
 
-            yield return new WaitForSeconds(itemPreviewDuration);
+            yield return new WaitForSecondsRealtime(itemPreviewDuration);
             image.transform.SetParent(slot);
 
             yield return StartCoroutine(GoToUIPosition(
@@ -120,20 +129,16 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            image.transform.SetParent(slot);
-
             yield return StartCoroutine(GoToUIPosition(
                image: image,
-               startScale: SpritePixelSize.Get(item.GetComponent<SpriteRenderer>(), _camera),//item.transform.localScale * 100,
+               startScale: startScale,
                targetScale: item.ScaleInInventoryUI,
                startRotation: image.transform.rotation,
                targetRotation: Quaternion.Euler(item.RotationInInventory),
                duration: goToSlotDuration,
                refLerpTime: 0f,
                percentage: 0f,
-               startPosition: new Vector2(
-                _camera.WorldToScreenPoint(item.gameObject.transform.position).x - image.transform.parent.GetComponent<RectTransform>().position.x,
-                _camera.WorldToScreenPoint(item.gameObject.transform.position).y - image.transform.parent.GetComponent<RectTransform>().position.y)));
+               startPosition: startPosition));
         }
 
         slot.GetComponent<Button>().enabled = true;
