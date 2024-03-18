@@ -632,10 +632,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slot 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3812401070398555864, guid: b3650faa3b16cb740ae89972ae7c4394, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5551576519303497614, guid: b3650faa3b16cb740ae89972ae7c4394, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -715,10 +711,6 @@ PrefabInstance:
     - target: {fileID: 5551576519303497614, guid: b3650faa3b16cb740ae89972ae7c4394, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550660722790019996, guid: b3650faa3b16cb740ae89972ae7c4394, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

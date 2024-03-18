@@ -2658,18 +2658,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 512698527}
     - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
-      propertyPath: goToSlotDuration
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
-      propertyPath: goToPreviewDuration
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
-      propertyPath: itemPreviewDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8856054271865379456, guid: f0469670e7e398c4fbc0635a7dc07ca6, type: 3}
       propertyPath: openInventoryButton
       value: 
       objectReference: {fileID: 2028770814}

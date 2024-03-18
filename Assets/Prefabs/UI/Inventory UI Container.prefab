@@ -121,10 +121,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2307535429220120894}
     m_Modifications:
-    - target: {fileID: 273791070929246812, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 347
-      objectReference: {fileID: 0}
     - target: {fileID: 292177012820230184, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -205,25 +201,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 895937417607638256, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6523976246456345777, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6751317691617385398, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
       propertyPath: m_Name
       value: Item Preview UI Container
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751317691617385398, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7704214619850235503, guid: 3e46b103ecf53014681b02f8570e65af, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
