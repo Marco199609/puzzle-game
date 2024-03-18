@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 49695892}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &49695894
@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 998935887}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &998935889
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1157830252}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1157830254
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1257928064}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1257928066
@@ -1397,7 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1358576325}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1358576327
@@ -1796,7 +1796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1718058002}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1718058004
@@ -2305,7 +2305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 2114102565}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &2114102567
@@ -2487,7 +2487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 2133828649}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &2133828651

@@ -1,7 +1,6 @@
 using SnowHorse.Utils;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -60,7 +59,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void PreviewItem(ItemData item)
+    public void PreviewItem(ItemData item, bool previewOnUI)
     {
         inventoryUIContainer.SetActive(true);
         var image = SetItemUISprite(item);
@@ -69,7 +68,7 @@ public class InventoryUI : MonoBehaviour
         {
             if (!slots[i].gameObject.activeInHierarchy)
             {
-                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: true));
+                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: previewOnUI));
                 movingItems.Add(coroutine);
                 return;
             }
@@ -78,7 +77,6 @@ public class InventoryUI : MonoBehaviour
 
     private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot, bool previewItem = true)
     {
-        //Inventory.Instance.CanAddItems = false;
         itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
@@ -94,22 +92,20 @@ public class InventoryUI : MonoBehaviour
         if(previewItem)
         {
             yield return StartCoroutine(GoToUIPosition(
-            image: image,
-            startScale: item.transform.localScale * 100,
-            targetScale: item.ScaleInPreviewUI,
-            startRotation: item.transform.rotation,
-            targetRotation: Quaternion.Euler(item.RotationInPreviewUI),
-            duration: goToPreviewDuration,
-            refLerpTime: 0f,
-            percentage: 0f,
-            startPosition: new Vector2(
-                _camera.WorldToScreenPoint(item.gameObject.transform.position).x - image.transform.parent.GetComponent<RectTransform>().position.x,
-                _camera.WorldToScreenPoint(item.gameObject.transform.position).y - image.transform.parent.GetComponent<RectTransform>().position.y)));
+                image: image,
+                startScale: SpritePixelSize.Get(item.GetComponent<SpriteRenderer>(), _camera), //item.transform.localScale * 100,
+                targetScale: item.ScaleInPreviewUI,
+                startRotation: item.transform.rotation,
+                targetRotation: Quaternion.Euler(item.RotationInPreviewUI),
+                duration: goToPreviewDuration,
+                refLerpTime: 0f,
+                percentage: 0f,
+                startPosition: new Vector2(
+                    _camera.WorldToScreenPoint(item.gameObject.transform.position).x - image.transform.parent.GetComponent<RectTransform>().position.x,
+                    _camera.WorldToScreenPoint(item.gameObject.transform.position).y - image.transform.parent.GetComponent<RectTransform>().position.y)));
 
             yield return new WaitForSeconds(itemPreviewDuration);
-
             image.transform.SetParent(slot);
-            //itemPreviewUIContainer.SetActive(false);
 
             yield return StartCoroutine(GoToUIPosition(
                 image: image,
@@ -125,11 +121,10 @@ public class InventoryUI : MonoBehaviour
         else
         {
             image.transform.SetParent(slot);
-            //itemPreviewUIContainer.SetActive(false);
 
             yield return StartCoroutine(GoToUIPosition(
                image: image,
-               startScale: item.transform.localScale * 100,
+               startScale: SpritePixelSize.Get(item.GetComponent<SpriteRenderer>(), _camera),//item.transform.localScale * 100,
                targetScale: item.ScaleInInventoryUI,
                startRotation: image.transform.rotation,
                targetRotation: Quaternion.Euler(item.RotationInInventory),
@@ -142,10 +137,8 @@ public class InventoryUI : MonoBehaviour
         }
 
         slot.GetComponent<Button>().enabled = true;
-
         if(movingItems.Count > 0) movingItems.RemoveAt(0); //Removes this coroutine
-        if(movingItems.Count <= 0) itemPreviewUIContainer.SetActive(false);//Inventory.Instance.CanAddItems = true;
-
+        if(movingItems.Count <= 0) itemPreviewUIContainer.SetActive(false);
         Debug.Log("Finished moving inventory UI");
     }
 

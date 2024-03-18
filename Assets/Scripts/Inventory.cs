@@ -28,12 +28,12 @@ public class Inventory : MonoBehaviour
 
     [NonSerialized] public bool CanAddItems = true;
 
-    public void Add(ItemData item)
+    public void Add(ItemData item, bool previewOnUI)
     {
         if(inventory.Count < maxInventoryCount)
         {
             DeselectPreviousItem();
-            inventoryUI.PreviewItem(item);
+            inventoryUI.PreviewItem(item, previewOnUI);
             item.gameObject.SetActive(false);
             item.gameObject.transform.SetParent(transform);
             inventory.Add(item);
