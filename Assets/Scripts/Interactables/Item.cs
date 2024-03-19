@@ -11,26 +11,25 @@ public class Item : MonoBehaviour, IDataPersistence
     [field: SerializeField] public Vector3 RotationInInventory { get; private set; }
     [field: SerializeField] public Color Color { get; private set; }
 
-    public bool Collected = false;
+    public bool collected = false;
+    public bool IsInInventory = false;
 
     public void LoadData(GameData data)
     {
-        data.itemsCollected.TryGetValue(id, out Collected);
+        data.ItemsCollected.TryGetValue(id, out collected);
+        if(collected) gameObject.SetActive(false);
 
-        if(Collected)
-        {
-            gameObject.SetActive(false);
-        }
+        data.InventoryItems.TryGetValue(id, out IsInInventory);
+        if (IsInInventory) Inventory.Instance.Add(item: this, previewOnUI: false, dataPersistenceMode: true);
     }
 
     public void SaveData(ref GameData data)
     {
-        if(data.itemsCollected.ContainsKey(id))
-        {
-            data.itemsCollected.Remove(id);
-        }
+        if(data.ItemsCollected.ContainsKey(id)) data.ItemsCollected.Remove(id);
+        data.ItemsCollected.Add(id, collected);
 
-        data.itemsCollected.Add(id, Collected);
+        if(data.InventoryItems.ContainsKey(id)) data.InventoryItems.Remove(id);
+        data.InventoryItems.Add(id, IsInInventory);
     }
 
     [ContextMenu("Generate guid for id")]

@@ -62,7 +62,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void PreviewItem(Item item, bool previewOnUI)
+    public void PreviewItem(Item item, bool previewOnUI, bool dataPersistenceMode = false)
     {
         inventoryUIContainer.SetActive(true);
         var image = SetItemUISprite(item);
@@ -71,14 +71,14 @@ public class InventoryUI : MonoBehaviour
         {
             if (!slots[i].gameObject.activeInHierarchy)
             {
-                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: previewOnUI));
+                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: previewOnUI, dataPersistenceMode));
                 movingItems.Add(coroutine);
                 return;
             }
         }
     }
 
-    private IEnumerator AddToInventoryUI(Item item, Image image, Transform slot, bool previewItem)
+    private IEnumerator AddToInventoryUI(Item item, Image image, Transform slot, bool previewItem, bool dataPersistenceMode = false)
     {
         itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
@@ -99,6 +99,8 @@ public class InventoryUI : MonoBehaviour
         var startPosition = new Vector2(
                     _camera.WorldToScreenPoint(item.gameObject.transform.position).x - parentRect.position.x,
                     _camera.WorldToScreenPoint(item.gameObject.transform.position).y - parentRect.position.y);
+
+        if (dataPersistenceMode) previewItem = false;
 
         if (previewItem)
         {
@@ -129,16 +131,25 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            yield return StartCoroutine(GoToUIPosition(
-               image: image,
-               startScale: startScale,
-               targetScale: item.ScaleInInventoryUI,
-               startRotation: image.transform.rotation,
-               targetRotation: Quaternion.Euler(item.RotationInInventory),
-               duration: goToSlotDuration,
-               refLerpTime: 0f,
-               percentage: 0f,
-               startPosition: startPosition));
+            if(dataPersistenceMode)
+            {
+                image.rectTransform.anchoredPosition = Vector3.zero;
+                image.rectTransform.sizeDelta = item.ScaleInInventoryUI;
+                image.transform.rotation = Quaternion.Euler(item.RotationInInventory);
+            }
+            else
+            {
+                yield return StartCoroutine(GoToUIPosition(
+                    image: image,
+                    startScale: startScale,
+                    targetScale: item.ScaleInInventoryUI,
+                    startRotation: image.transform.rotation,
+                    targetRotation: Quaternion.Euler(item.RotationInInventory),
+                    duration: goToSlotDuration,
+                    refLerpTime: 0f,
+                    percentage: 0f,
+                    startPosition: startPosition));
+            }
         }
 
         slot.GetComponent<Button>().enabled = true;
