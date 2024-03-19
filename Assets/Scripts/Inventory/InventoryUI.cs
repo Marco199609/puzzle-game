@@ -62,7 +62,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void PreviewItem(ItemData item, bool previewOnUI)
+    public void PreviewItem(Item item, bool previewOnUI)
     {
         inventoryUIContainer.SetActive(true);
         var image = SetItemUISprite(item);
@@ -78,7 +78,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    private IEnumerator AddToInventoryUI(ItemData item, Image image, Transform slot, bool previewItem)
+    private IEnumerator AddToInventoryUI(Item item, Image image, Transform slot, bool previewItem)
     {
         itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
@@ -252,7 +252,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    private Image SetItemUISprite(ItemData item, bool preserveAspect = true)
+    private Image SetItemUISprite(Item item, bool preserveAspect = true)
     {
         var image = Instantiate(itemImagePrefab, itemImagePrefab.transform.position, Quaternion.identity, itemImagePrefab.transform.parent);
         image.sprite = item.Sprite;

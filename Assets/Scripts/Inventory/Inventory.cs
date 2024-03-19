@@ -8,8 +8,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform usedItemsParent;
 
     private int maxInventoryCount;
-    private List<ItemData> inventory = new List<ItemData>();
-    private ItemData selectedItem;
+    private List<Item> inventory = new List<Item>();
+    private Item selectedItem;
     private InventoryUI inventoryUI;
 
     public static Inventory Instance;
@@ -23,12 +23,12 @@ public class Inventory : MonoBehaviour
         maxInventoryCount = inventoryUI.GetSlots.Length;
     }
 
-    public List<ItemData> GetInventoryItems { get => inventory; }
-    public ItemData GetSelected { get => selectedItem; }
+    public List<Item> GetInventoryItems { get => inventory; }
+    public Item GetSelected { get => selectedItem; }
 
     [NonSerialized] public bool CanAddItems = true;
 
-    public void Add(ItemData item, bool previewOnUI)
+    public void Add(Item item, bool previewOnUI)
     {
         if(inventory.Count < maxInventoryCount)
         {
@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public void Select(ItemData item)
+    public void Select(Item item)
     {
         if (inventory.Contains(item)) selectedItem = item;
         else Debug.Log($"Item {item.Name} does not exist in inventory!");
@@ -57,7 +57,7 @@ public class Inventory : MonoBehaviour
         inventoryUI.DeselectSlot();
     }
 
-    public void UseItem(ItemData item)
+    public void UseItem(Item item)
     {
         if (inventory.Contains(item))
         {

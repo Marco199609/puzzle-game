@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour
 {
-    [SerializeField] private List<ItemData> requiredItems;
+    [SerializeField] private List<Item> requiredItems;
     [SerializeField] private List<GameObject> resultingBehaviours;
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
