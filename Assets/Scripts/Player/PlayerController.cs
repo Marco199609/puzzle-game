@@ -4,9 +4,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    [SerializeField] private Sprite cross;
-    [SerializeField] private Sprite circle;
-    [SerializeField] private SpriteRenderer cursor;
 
     private bool canInteract;
     private Vector3 hitPoint;
@@ -15,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.visible = false;
         raycaster = GetComponent<Raycaster>();
     }
 
@@ -49,14 +45,7 @@ public class PlayerController : MonoBehaviour
                 canInteract = false;
             }
 
-            CursorControl(canInteract);
+            UIController.Instance.SetCursor(canInteract);
         }
-    }
-
-    private void CursorControl(bool canInteract)
-    {
-        cursor.sprite = canInteract ? circle : cross;
-        var cursorPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-        cursor.gameObject.transform.position = new Vector3(cursorPosition.x, cursorPosition.y, -1);
     }
 }

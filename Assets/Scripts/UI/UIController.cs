@@ -1,29 +1,26 @@
-using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject mainCanvas;
-    [SerializeField] private GameObject itemUIContainer;
-    [SerializeField] private Image itemImage;
-    [SerializeField] private TextMeshProUGUI itemName;
+
+    [Header("Cursor")]
+    [SerializeField] private Texture2D cross;
+    [SerializeField] private Texture2D circle;
 
     public static UIController Instance;
+
     private void Awake()
     {
         if(Instance) Destroy(this);
         else Instance = this;
     }
 
-    public void ShowItem(ItemData item)
+    #region Cursor
+    public void SetCursor(bool canInteract)
     {
-        itemName.text = item.Name;
-        itemImage.sprite = item.Sprite;
-        itemImage.color = item.color;
-        itemImage.preserveAspect = true;
-
-        itemUIContainer.SetActive(true);
+        var cursor = canInteract ? circle : cross;
+        Cursor.SetCursor(cursor, new Vector2(cursor.height / 2, cursor.width / 2), CursorMode.Auto);
     }
+    #endregion
 }
