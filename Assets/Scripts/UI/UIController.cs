@@ -17,7 +17,7 @@ public class UIController : MonoBehaviour
         else Instance = this;
     }
 
-    public void ShowItem(ItemData item)
+    public void ShowItem(Item item)
     {
         itemName.text = item.Name;
         itemImage.sprite = item.Sprite;
