@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Behaviour_AddToInventory : MonoBehaviour, IBehaviour
 {
-    [SerializeField] private ItemData item;
+    [SerializeField] private Item item;
     [SerializeField] private bool previewInUI = true;
     [SerializeField] private bool onInteraction;
     [SerializeField] private bool onInspection;
@@ -11,7 +11,11 @@ public class Behaviour_AddToInventory : MonoBehaviour, IBehaviour
     {
         if(Inventory.Instance.CanAddItems)
         {
-            if (onInteraction && isInspecting || onInspection && isInspecting || onInteraction == isInteracting == onInspection == isInspecting == false) Inventory.Instance.Add(item, previewInUI);
+            if (onInteraction && isInspecting || onInspection && isInspecting || onInteraction == isInteracting == onInspection == isInspecting == false)
+            {
+            	item.Collected = true;
+            	Inventory.Instance.Add(item, previewInUI);
+            }
         }
     }
 }

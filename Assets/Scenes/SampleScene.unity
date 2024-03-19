@@ -168,9 +168,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 49695890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: bafa7fc8-d841-4abf-9851-2d8a58b84dfe
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -178,6 +179,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &49695893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 49695892}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &49695894
@@ -672,6 +674,67 @@ MonoBehaviour:
   previewInUI: 1
   onInteraction: 0
   onInspection: 1
+--- !u!1001 &981454334
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1215332123368593632, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_Name
+      value: DataPersistenceManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2936628799997139765, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: useEncryption
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049454172908072041, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3dabad1a3c0c5da4abb53861e351e39a, type: 3}
 --- !u!1 &998935885
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,9 +780,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 998935885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 6de51cd8-c56d-48ae-848a-46c9c4442a38
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -727,6 +791,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &998935888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,7 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 998935887}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &998935889
@@ -969,9 +1034,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1157830250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 8edb3619-3fee-48d5-aa3f-686e60ea928e
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -979,6 +1045,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &1157830253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,7 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1157830252}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1157830254
@@ -1151,9 +1218,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1257928062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: dc95c9ce-e0c3-4a6a-85e0-911b51f4ecd5
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -1161,6 +1229,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &1257928065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,7 +1243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1257928064}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1257928066
@@ -1374,9 +1443,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1358576323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 983b18c5-d8c9-44bc-a7dd-14571a2788a0
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -1384,6 +1454,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &1358576326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,7 +1468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1358576325}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1358576327
@@ -1718,9 +1789,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1674411145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 20381bd0-142f-4c09-b787-8db344087202
   <Name>k__BackingField: Mailbox
   <Sprite>k__BackingField: {fileID: 21300000, guid: c9c28849e8ccc9d4b80d7cf31d5cf183, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -1728,6 +1800,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 0}
   <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  Collected: 0
 --- !u!1 &1718058000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,9 +1846,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1718058000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: abd071e9-1425-493c-a4e0-a0d9cee75929
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -1783,6 +1857,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &1718058003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,7 +1871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1718058002}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &1718058004
@@ -2282,9 +2357,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2114102563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: b00f26a9-cab2-4d50-a9a9-8cb93d860095
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -2292,6 +2368,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &2114102566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2305,7 +2382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 2114102565}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &2114102567
@@ -2464,9 +2541,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133828647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890f5afc1cde7244b990779b0010b7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 39a74541-249c-48c1-b7f8-ab5b24ab7c46
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
@@ -2474,6 +2552,7 @@ MonoBehaviour:
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
   <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
+  Collected: 0
 --- !u!114 &2133828650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2487,7 +2566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 2133828649}
-  previewInUI: 0
+  previewInUI: 1
   onInteraction: 0
   onInspection: 1
 --- !u!114 &2133828651
@@ -2953,3 +3032,4 @@ SceneRoots:
   - {fileID: 1978417882}
   - {fileID: 3441061546265296635}
   - {fileID: 1996430592}
+  - {fileID: 981454334}
