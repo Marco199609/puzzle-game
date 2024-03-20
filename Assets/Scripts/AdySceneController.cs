@@ -7,6 +7,7 @@ public class AdySceneController : MonoBehaviour
 {
     [SerializeField] private Animator butterflyAnimator;
     [SerializeField] private Animator heartAnimator;
+    [SerializeField] private Animator catGlowAnimator;
     [SerializeField] private AnimationClip butterflyClip;
     [SerializeField] private Image plantImage;
     [SerializeField] private Image catImage;
@@ -19,7 +20,8 @@ public class AdySceneController : MonoBehaviour
 
     private IEnumerator CatColorControl()
     {
-        yield return new WaitForSecondsRealtime(butterflyClip.length + 1f);
+        yield return new WaitForSecondsRealtime(butterflyClip.length + 1.2f);
+        catGlowAnimator.SetBool("start", true);
 
         var percentage = 0f;
         var lerpRef = 0f;
@@ -32,6 +34,7 @@ public class AdySceneController : MonoBehaviour
             yield return null;
         }
 
+
         yield return StartCoroutine(PlantFillControl());
     }
 
@@ -40,6 +43,8 @@ public class AdySceneController : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
 
         heartAnimator.SetBool("start", true);
+
+
 
         var percentage = 0f;
         var lerpRef = 0f;
