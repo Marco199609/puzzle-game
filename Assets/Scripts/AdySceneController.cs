@@ -14,14 +14,18 @@ public class AdySceneController : MonoBehaviour
     [SerializeField] private Color catTargetColor;
     void Start()
     {
-        butterflyAnimator.SetBool("start", true);
+        plantImage.fillAmount = 0;
+
         StartCoroutine(CatColorControl());
     }
 
     private IEnumerator CatColorControl()
     {
-        yield return new WaitForSecondsRealtime(butterflyClip.length + 1.2f);
+        yield return new WaitForSeconds(2f);
+        butterflyAnimator.SetBool("start", true);
+        yield return new WaitForSecondsRealtime(butterflyClip.length + 0.8f);
         catGlowAnimator.SetBool("start", true);
+        yield return new WaitForSecondsRealtime(0.4f);
 
         var percentage = 0f;
         var lerpRef = 0f;
@@ -49,10 +53,25 @@ public class AdySceneController : MonoBehaviour
         var percentage = 0f;
         var lerpRef = 0f;
 
+        plantImage.fillClockwise = true;
+
+        while (percentage < 1)
+        {
+            percentage = Interpolation.Linear(1f, ref lerpRef);
+            plantImage.fillAmount = Mathf.Lerp(0, 1, percentage);
+
+            yield return null;
+        }
+
+        percentage = 0;
+        lerpRef = 0;
+
+        plantImage.fillClockwise = false;
+
         while(percentage < 1)
         {
-            percentage = Interpolation.Linear(1.5f, ref lerpRef);
-            plantImage.fillAmount = Mathf.Lerp(0, 1, percentage);
+            percentage = Interpolation.Linear(1f, ref lerpRef);
+            plantImage.fillAmount = Mathf.Lerp(1, 0, percentage);
 
             yield return null;
         }
