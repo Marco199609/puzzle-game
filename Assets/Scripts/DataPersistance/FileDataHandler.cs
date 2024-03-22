@@ -1,8 +1,6 @@
 using Newtonsoft.Json;
 using System;
-using System.Diagnostics;
 using System.IO;
-using UnityEngine;
 
 public class FileDataHandler
 {
@@ -20,31 +18,22 @@ public class FileDataHandler
 
     public GameData Load()
     {
-        ///Use Path.Combine to account for different OS's having different path separators
         string fullPath = Path.Combine(dataDirPath, fileName);
         GameData loadedData = null;
+
         if(File.Exists(fullPath))
         {
             try
             {
-                ///Load the serialized data from the file
                 string dataToLoad = string.Empty;
 
                 using(FileStream fileStream = new FileStream(fullPath, FileMode.Open))
                 {
-                    using(StreamReader reader = new StreamReader(fileStream))
-                    {
-                        dataToLoad = reader.ReadToEnd();
-                    }
+                    using(StreamReader reader = new StreamReader(fileStream)) { dataToLoad = reader.ReadToEnd(); }
                 }
 
-                ///Optionally decrypt data
-                if (useEncryption)
-                {
-                    dataToLoad = EncryptDecrypt(dataToLoad);
-                }
+                if (useEncryption) dataToLoad = EncryptDecrypt(dataToLoad);
 
-                ///Deserialize data from Json back into the C# object
                 loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
             }
             catch (Exception e)
@@ -58,30 +47,18 @@ public class FileDataHandler
 
     public void Save(GameData data)
     {
-        ///Use Path.Combine to account for different OS's having different path separators
         string fullPath = Path.Combine(dataDirPath, fileName);
 
         try
         {
-            ///Create the directory the file will be written to if it doesn't already exist
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
-
-            ///Serialize the C# game data object into Json
             string dataToStore = JsonConvert.SerializeObject(data);
 
-            ///Optionally encrypt data
-            if(useEncryption)
-            {
-                dataToStore = EncryptDecrypt(dataToStore);
-            }
+            if(useEncryption) dataToStore = EncryptDecrypt(dataToStore);
 
-            ///Write the serialized data to the file
             using(FileStream fileStream = new FileStream(fullPath, FileMode.Create))
             {
-                using(StreamWriter writer = new StreamWriter(fileStream))
-                {
-                    writer.Write(dataToStore);
-                }
+                using(StreamWriter writer = new StreamWriter(fileStream)) { writer.Write(dataToStore); }
             }
         }
         catch(Exception e)
@@ -90,7 +67,7 @@ public class FileDataHandler
         }
     }
 
-    ///Below is a simple implementation of XOR encryption
+    ///A simple implementation of XOR encryption
     private string EncryptDecrypt(string data)
     {
         string modifiedData = string.Empty;

@@ -13,7 +13,7 @@ public class Behaviour_AddToInventory : MonoBehaviour, IBehaviour
         {
             if (onInteraction && isInspecting || onInspection && isInspecting || onInteraction == isInteracting == onInspection == isInspecting == false)
             {
-            	item.Collected = true;
+            	item.collected = true;
             	Inventory.Instance.Add(item, previewInUI);
             }
         }

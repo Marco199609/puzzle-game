@@ -28,15 +28,16 @@ public class Inventory : MonoBehaviour
 
     [NonSerialized] public bool CanAddItems = true;
 
-    public void Add(Item item, bool previewOnUI)
+    public void Add(Item item, bool previewOnUI, bool dataPersistenceMode = false)
     {
         if(inventory.Count < maxInventoryCount)
         {
             DeselectPreviousItem();
-            inventoryUI.PreviewItem(item, previewOnUI);
+            inventoryUI.Add(item, previewOnUI, dataPersistenceMode);
             item.gameObject.SetActive(false);
             item.gameObject.transform.SetParent(transform);
             inventory.Add(item);
+            item.isInInventory = true;
         }
         else
         {
@@ -63,10 +64,14 @@ public class Inventory : MonoBehaviour
         {
             if (selectedItem == item) selectedItem = null;
             inventory.Remove(item);
+            item.isInInventory = false;
             item.transform.SetParent(usedItemsParent);
 
             StartCoroutine(inventoryUI.RemoveInventoryItem());
         }
-        else Debug.Log($"Item {item.Name} does not exist in inventory!");
+        else
+        {
+            Debug.Log($"Item {item.Name} does not exist in inventory!");
+        }
     }
 }

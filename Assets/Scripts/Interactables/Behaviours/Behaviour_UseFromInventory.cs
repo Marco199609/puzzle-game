@@ -1,12 +1,17 @@
 using SnowHorse.Utils;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour
+public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersistence
 {
     [SerializeField] private List<Item> requiredItems;
     [SerializeField] private List<GameObject> resultingBehaviours;
+
+    [SerializeField] private SaveableObject saveableObject;
+
+    private List<string> usedItemIds = new List<string>();
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
         RequireItems();
@@ -19,15 +24,13 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour
             if (requiredItems[i] == Inventory.Instance.GetSelected)
             {
                 Inventory.Instance.UseItem(requiredItems[i]);
+                usedItemIds.Add(requiredItems[i].SaveableObject.Id);
                 requiredItems.Remove(requiredItems[i]);
                 break;
             }
         }
 
-        if(requiredItems.Count <= 0 )
-        {
-            StartCoroutine(Result());
-        }
+        if(requiredItems.Count <= 0 ) StartCoroutine(Result());
     }
 
     private IEnumerator Result()
@@ -45,5 +48,37 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour
                 resultingBehaviours[i].GetComponent<IBehaviour>().Behaviour(true, true);
             }
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (!saveableObject)
+        {
+            Debug.LogError($"No saveable object on {gameObject}!");
+        }
+        else
+        {
+            usedItemIds = new List<string>();
+
+            if (data.RequiredItemsUsed.ContainsKey(saveableObject.Id))
+            {
+                var requiredItemsUsed = data.RequiredItemsUsed[saveableObject.Id];
+
+                foreach (Item item in requiredItems.ToList())
+                {
+                    if (requiredItemsUsed.Contains(item.SaveableObject.Id))
+                    {
+                        usedItemIds.Add(item.SaveableObject.Id);
+                        requiredItems.Remove(item);
+                    }
+                }
+            }
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.RequiredItemsUsed.ContainsKey(saveableObject.Id)) data.RequiredItemsUsed.Remove(saveableObject.Id);
+        data.RequiredItemsUsed.Add(saveableObject.Id, usedItemIds);
     }
 }

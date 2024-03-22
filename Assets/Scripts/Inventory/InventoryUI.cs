@@ -1,6 +1,5 @@
 using SnowHorse.Utils;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,11 +20,11 @@ public class InventoryUI : MonoBehaviour
 
     private float goToPreviewMultiplier = 1000f;
     private Button selectedSlot;
-    private List<Coroutine> movingItems = new List<Coroutine>();
+    private int movingItemCount = 0;
 
     public Button[] GetSlots { get => slots; }
 
-    private void Start()
+    private void Awake()
     {
         foreach(var slot in slots)
         {
@@ -34,15 +33,18 @@ public class InventoryUI : MonoBehaviour
             slot.gameObject.SetActive(false);
         }
 
+        inventoryUIContainer.SetActive(false);
+    }
+
+    private void Start()
+    {
         openInventoryButton.onClick.AddListener(() =>
         {
             inventoryUIContainer.SetActive(!inventoryUIContainer.activeInHierarchy);
             Inventory.Instance.DeselectPreviousItem();
         });
 
-        inventoryUIContainer.SetActive(false);
         ModifyBackgroundWidth(false);
-
         goToPreviewDuration *= goToPreviewMultiplier;
     }
 
@@ -62,7 +64,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void PreviewItem(Item item, bool previewOnUI)
+    public void Add(Item item, bool previewOnUI, bool dataPersistenceMode = false)
     {
         inventoryUIContainer.SetActive(true);
         var image = SetItemUISprite(item);
@@ -71,16 +73,18 @@ public class InventoryUI : MonoBehaviour
         {
             if (!slots[i].gameObject.activeInHierarchy)
             {
-                var coroutine = StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: previewOnUI));
-                movingItems.Add(coroutine);
+                StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: previewOnUI, dataPersistenceMode));
+                //movingItems.Add(coroutine);
                 return;
             }
         }
     }
 
-    private IEnumerator AddToInventoryUI(Item item, Image image, Transform slot, bool previewItem)
+    private IEnumerator AddToInventoryUI(Item item, Image image, Transform slot, bool previewItem, bool dataPersistenceMode = false)
     {
-        itemPreviewUIContainer.SetActive(true);
+        movingItemCount++;
+        Debug.Log($"Started moving item to inventory UI, moving item count: {movingItemCount}");
+        if (!dataPersistenceMode) itemPreviewUIContainer.SetActive(true);
         image.gameObject.SetActive(true);
         slot.gameObject.SetActive(true);
         LayoutRebuilder.ForceRebuildLayoutImmediate(inventorySlotsContainer.GetComponent<RectTransform>());
@@ -99,6 +103,8 @@ public class InventoryUI : MonoBehaviour
         var startPosition = new Vector2(
                     _camera.WorldToScreenPoint(item.gameObject.transform.position).x - parentRect.position.x,
                     _camera.WorldToScreenPoint(item.gameObject.transform.position).y - parentRect.position.y);
+
+        if (dataPersistenceMode) previewItem = false;
 
         if (previewItem)
         {
@@ -121,7 +127,7 @@ public class InventoryUI : MonoBehaviour
                 startScale: item.ScaleInPreviewUI,
                 targetScale: item.ScaleInInventoryUI,
                 startRotation: image.transform.rotation,
-                targetRotation: Quaternion.Euler(item.RotationInInventory),
+                targetRotation: Quaternion.Euler(new Vector3(0, 0, item.ZRotationInInventory)),
                 duration: goToSlotDuration,
                 refLerpTime: 0f,
                 percentage: 0f,
@@ -129,22 +135,31 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            yield return StartCoroutine(GoToUIPosition(
-               image: image,
-               startScale: startScale,
-               targetScale: item.ScaleInInventoryUI,
-               startRotation: image.transform.rotation,
-               targetRotation: Quaternion.Euler(item.RotationInInventory),
-               duration: goToSlotDuration,
-               refLerpTime: 0f,
-               percentage: 0f,
-               startPosition: startPosition));
+            if(dataPersistenceMode)
+            {
+                image.rectTransform.anchoredPosition = Vector3.zero;
+                image.rectTransform.sizeDelta = item.ScaleInInventoryUI;
+                image.transform.rotation = Quaternion.Euler(new Vector3(0, 0, item.ZRotationInInventory));
+            }
+            else
+            {
+                yield return StartCoroutine(GoToUIPosition(
+                    image: image,
+                    startScale: startScale,
+                    targetScale: item.ScaleInInventoryUI,
+                    startRotation: image.transform.rotation,
+                    targetRotation: Quaternion.Euler(new Vector3(0, 0, item.ZRotationInInventory)),
+                    duration: goToSlotDuration,
+                    refLerpTime: 0f,
+                    percentage: 0f,
+                    startPosition: startPosition));
+            }
         }
 
         slot.GetComponent<Button>().enabled = true;
-        if(movingItems.Count > 0) movingItems.RemoveAt(0); //Removes this coroutine
-        if(movingItems.Count <= 0) itemPreviewUIContainer.SetActive(false);
-        Debug.Log("Finished moving inventory UI");
+        if(movingItemCount > 0) movingItemCount--; //Removes this coroutine
+        if(movingItemCount <= 0) itemPreviewUIContainer.SetActive(false);
+        Debug.Log($"Finished moving item to inventory UI, moving item count: {movingItemCount}");
     }
 
     private IEnumerator GoToUIPosition(float percentage, float refLerpTime, Image image, Vector3 startPosition, Vector3 startScale, Vector3 targetScale, Quaternion startRotation, Quaternion targetRotation, float duration)
@@ -161,7 +176,7 @@ public class InventoryUI : MonoBehaviour
 
     public IEnumerator RemoveInventoryItem()
     {
-        yield return new WaitUntil(()=>movingItems.Count <= 0);
+        yield return new WaitUntil(()=>movingItemCount <= 0);
         var removed = false;
 
         for (int i = 0; i < slots.Length; i++)
