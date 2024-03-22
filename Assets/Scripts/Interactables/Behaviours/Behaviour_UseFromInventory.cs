@@ -1,5 +1,4 @@
 using SnowHorse.Utils;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,10 +30,7 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
             }
         }
 
-        if(requiredItems.Count <= 0 )
-        {
-            StartCoroutine(Result());
-        }
+        if(requiredItems.Count <= 0 ) StartCoroutine(Result());
     }
 
     private IEnumerator Result()
@@ -82,11 +78,7 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
 
     public void SaveData(ref GameData data)
     {
-        if (data.RequiredItemsUsed.ContainsKey(saveableObject.Id))
-        {
-            data.RequiredItemsUsed.Remove(saveableObject.Id);
-        }
-
+        if (data.RequiredItemsUsed.ContainsKey(saveableObject.Id)) data.RequiredItemsUsed.Remove(saveableObject.Id);
         data.RequiredItemsUsed.Add(saveableObject.Id, usedItemIds);
     }
 }

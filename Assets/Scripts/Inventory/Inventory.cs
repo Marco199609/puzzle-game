@@ -69,6 +69,9 @@ public class Inventory : MonoBehaviour
 
             StartCoroutine(inventoryUI.RemoveInventoryItem());
         }
-        else Debug.Log($"Item {item.Name} does not exist in inventory!");
+        else
+        {
+            Debug.Log($"Item {item.Name} does not exist in inventory!");
+        }
     }
 }
