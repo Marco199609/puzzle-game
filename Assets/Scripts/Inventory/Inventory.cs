@@ -33,11 +33,11 @@ public class Inventory : MonoBehaviour
         if(inventory.Count < maxInventoryCount)
         {
             DeselectPreviousItem();
-            inventoryUI.PreviewItem(item, previewOnUI, dataPersistenceMode);
+            inventoryUI.Add(item, previewOnUI, dataPersistenceMode);
             item.gameObject.SetActive(false);
             item.gameObject.transform.SetParent(transform);
             inventory.Add(item);
-            item.IsInInventory = true;
+            item.isInInventory = true;
         }
         else
         {
@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
         {
             if (selectedItem == item) selectedItem = null;
             inventory.Remove(item);
-            item.IsInInventory = false;
+            item.isInInventory = false;
             item.transform.SetParent(usedItemsParent);
 
             StartCoroutine(inventoryUI.RemoveInventoryItem());

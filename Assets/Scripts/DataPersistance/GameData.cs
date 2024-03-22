@@ -5,13 +5,13 @@ public class GameData
 {
     public Dictionary<string, bool> ItemsCollected;
     public Dictionary<string, List<string>> RequiredItemsUsed;
-    public Dictionary<string, bool> InventoryItems;
+    public Dictionary<string, bool> ItemsInInventory;
 
     public GameData() 
     {
         ItemsCollected = new Dictionary<string, bool>();
         RequiredItemsUsed = new Dictionary<string, List<string>>();
-        InventoryItems = new Dictionary<string, bool>();
+        ItemsInInventory = new Dictionary<string, bool>();
     }
 
 }

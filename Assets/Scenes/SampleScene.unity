@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 49695894}
   - component: {fileID: 49695893}
   - component: {fileID: 49695892}
+  - component: {fileID: 49695897}
   m_Layer: 0
   m_Name: Envelope Item (1)
   m_TagString: Untagged
@@ -171,15 +172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: bafa7fc8-d841-4abf-9851-2d8a58b84dfe
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 49695897}
 --- !u!114 &49695893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +307,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &49695897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49695890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: b62950cc-82d5-4b53-8680-5ef7974e935e
 --- !u!114 &100712971 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3477026295310848895, guid: 43a05ce6ea2058b4ab50a6bf015a595d, type: 3}
@@ -753,6 +766,7 @@ GameObject:
   - component: {fileID: 998935889}
   - component: {fileID: 998935888}
   - component: {fileID: 998935887}
+  - component: {fileID: 998935892}
   m_Layer: 0
   m_Name: Envelope Item (5)
   m_TagString: Untagged
@@ -787,15 +801,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 6de51cd8-c56d-48ae-848a-46c9c4442a38
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 998935892}
 --- !u!114 &998935888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,6 +936,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &998935892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998935885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: dba8a069-b6c9-42ad-9b71-a94326bf9b77
 --- !u!114 &1037521990 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6033451438378164378, guid: 43a05ce6ea2058b4ab50a6bf015a595d, type: 3}
@@ -1007,6 +1033,7 @@ GameObject:
   - component: {fileID: 1157830254}
   - component: {fileID: 1157830253}
   - component: {fileID: 1157830252}
+  - component: {fileID: 1157830257}
   m_Layer: 0
   m_Name: Envelope Item (8)
   m_TagString: Untagged
@@ -1041,15 +1068,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 8edb3619-3fee-48d5-aa3f-686e60ea928e
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 1157830257}
 --- !u!114 &1157830253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,6 +1203,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1157830257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157830250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: f528c0c9-f4f3-4a76-9a2c-803314f47770
 --- !u!1 &1257928062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1230,7 @@ GameObject:
   - component: {fileID: 1257928066}
   - component: {fileID: 1257928065}
   - component: {fileID: 1257928064}
+  - component: {fileID: 1257928069}
   m_Layer: 0
   m_Name: Envelope Item (7)
   m_TagString: Untagged
@@ -1225,15 +1265,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: dc95c9ce-e0c3-4a6a-85e0-911b51f4ecd5
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 1257928069}
 --- !u!114 &1257928065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,6 +1400,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1257928069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257928062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 8ca4f9e1-52c6-4342-aba0-cb984afad7da
 --- !u!1 &1348890217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,6 +1468,7 @@ GameObject:
   - component: {fileID: 1358576327}
   - component: {fileID: 1358576326}
   - component: {fileID: 1358576325}
+  - component: {fileID: 1358576330}
   m_Layer: 0
   m_Name: Envelope Item (6)
   m_TagString: Untagged
@@ -1450,15 +1503,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 983b18c5-d8c9-44bc-a7dd-14571a2788a0
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 1358576330}
 --- !u!114 &1358576326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,6 +1638,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1358576330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358576323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: f1c73a0d-26b1-47e6-8525-5290d9b4b009
 --- !u!1 &1513181258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2729020684724844501, guid: 43a05ce6ea2058b4ab50a6bf015a595d, type: 3}
@@ -1627,6 +1692,7 @@ GameObject:
   - component: {fileID: 1674411147}
   - component: {fileID: 1674411150}
   - component: {fileID: 1674411151}
+  - component: {fileID: 1674411152}
   m_Layer: 0
   m_Name: Mailbox Item
   m_TagString: Untagged
@@ -1784,6 +1850,7 @@ MonoBehaviour:
   - {fileID: 1157830252}
   resultingBehaviours:
   - {fileID: 955749606}
+  saveableObject: {fileID: 1674411152}
 --- !u!114 &1674411151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,15 +1863,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 20381bd0-142f-4c09-b787-8db344087202
   <Name>k__BackingField: Mailbox
   <Sprite>k__BackingField: {fileID: 21300000, guid: c9c28849e8ccc9d4b80d7cf31d5cf183, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 0}
+  <ZRotationInInventory>k__BackingField: 0
   <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 1674411152}
+--- !u!114 &1674411152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674411145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: f51fc52a-dcf8-4391-bf73-af63026560e6
 --- !u!1 &1718058000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,6 +1898,7 @@ GameObject:
   - component: {fileID: 1718058004}
   - component: {fileID: 1718058003}
   - component: {fileID: 1718058002}
+  - component: {fileID: 1718058007}
   m_Layer: 0
   m_Name: Envelope Item (4)
   m_TagString: Untagged
@@ -1853,15 +1933,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: abd071e9-1425-493c-a4e0-a0d9cee75929
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 1718058007}
 --- !u!114 &1718058003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,6 +2068,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1718058007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718058000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: d85999b6-307f-4f27-9358-c7df7c8bec9f
 --- !u!1 &1795020776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2422,7 @@ GameObject:
   - component: {fileID: 2114102567}
   - component: {fileID: 2114102566}
   - component: {fileID: 2114102565}
+  - component: {fileID: 2114102570}
   m_Layer: 0
   m_Name: Envelope Item (2)
   m_TagString: Untagged
@@ -2364,15 +2457,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: b00f26a9-cab2-4d50-a9a9-8cb93d860095
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 2114102570}
 --- !u!114 &2114102566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,6 +2592,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2114102570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114102563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 95eda00e-a19f-402d-9b8c-118c701ecc21
 --- !u!1 &2133828647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,6 +2619,7 @@ GameObject:
   - component: {fileID: 2133828651}
   - component: {fileID: 2133828650}
   - component: {fileID: 2133828649}
+  - component: {fileID: 2133828654}
   m_Layer: 0
   m_Name: Envelope Item (3)
   m_TagString: Untagged
@@ -2548,15 +2654,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c24b0642aab964395b4b62fab11e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 39a74541-249c-48c1-b7f8-ab5b24ab7c46
   <Name>k__BackingField: Envelope
   <Sprite>k__BackingField: {fileID: 21300000, guid: 154e60f4de350364caa95a1b4e839c26, type: 3}
   <ScaleInPreviewUI>k__BackingField: {x: 500, y: 500}
   <ScaleInInventoryUI>k__BackingField: {x: 120, y: 120}
   <RotationInPreviewUI>k__BackingField: {x: 0, y: 0}
-  <RotationInInventory>k__BackingField: {x: 0, y: 0, z: 30}
+  <ZRotationInInventory>k__BackingField: 30
   <Color>k__BackingField: {r: 0.6431373, g: 0.23921569, b: 0.23921569, a: 1}
-  Collected: 0
+  <SaveableObject>k__BackingField: {fileID: 2133828654}
 --- !u!114 &2133828650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2684,6 +2789,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2133828654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133828647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8e37f60f34d2489364329a0f78da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 4f81fa84-e8b1-4065-bdaf-f774bd9fe208
 --- !u!1001 &3441061546265296635
 PrefabInstance:
   m_ObjectHideFlags: 0
