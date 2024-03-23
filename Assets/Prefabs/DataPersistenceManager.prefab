@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01dc748a18e100340bf91a0a14535f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.game
-  useEncryption: 1
+  fileName: data
+  useEncryption: 0
