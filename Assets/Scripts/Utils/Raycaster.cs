@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SnowHorse.Utils
 {
-    public static class Raycaster
+    public class Raycaster
     {
         public static GameObject Cast(Vector3 origin, Vector3 direction, float maxDistance, LayerMask layerMask, out Vector3 hitPoint, bool debugRay = false, Color debugColor = new Color())
         {
@@ -34,10 +34,8 @@ namespace SnowHorse.Utils
 
         public static GameObject Cast2D(Vector3 origin, Vector3 direction, float maxDistance, LayerMask layerMask, out Vector3 hitPoint, bool debugRay = false, Color debugColor = new Color())
         {
-            RaycastHit2D hit = Physics2D.Raycast(origin, direction, maxDistance, layerMask);
-            GameObject objectHit;
-
-            objectHit = hit.collider ? hit.collider.gameObject : null;
+            var hit = Physics2D.Raycast(origin, direction, maxDistance, layerMask);
+            var objectHit = hit.collider ? hit.collider.gameObject : null;
             hitPoint = objectHit ? hit.point : Vector3.zero;
 
             if (debugRay) Debug.DrawRay(origin, direction * maxDistance, debugColor);
