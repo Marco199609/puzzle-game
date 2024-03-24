@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class SaveableObject : MonoBehaviour
+public class ObjectGUID : MonoBehaviour
 {
     [field: SerializeField] public string Id { get; private set; }
 
@@ -11,10 +11,10 @@ public class SaveableObject : MonoBehaviour
 
     private void OnEnable()
     {
-        EditorApplication.update += GenerateGUID;
+        EditorApplication.update += Generate;
     }
 
-    private void GenerateGUID()
+    private void Generate()
     {
         if(EditorApplication.timeSinceStartup < delayInSeconds && (string.IsNullOrEmpty(Id)))
         {
@@ -33,12 +33,12 @@ public class SaveableObject : MonoBehaviour
                 Debug.Log($"Detected existing GUID for {gameObject.name}.");
             }
 
-            EditorApplication.update -= GenerateGUID;
+            EditorApplication.update -= Generate;
         }
     }
 
     private void OnDestroy()
     {
-        EditorApplication.update -= GenerateGUID;
+        EditorApplication.update -= Generate;
     }
 }

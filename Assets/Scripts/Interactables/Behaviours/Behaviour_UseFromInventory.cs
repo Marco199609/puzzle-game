@@ -9,7 +9,7 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
     [SerializeField] private List<Item> requiredItems;
     [SerializeField] private List<GameObject> resultingBehaviours;
 
-    [SerializeField] private SaveableObject saveableObject;
+    [SerializeField] private ObjectGUID guid;
 
     private List<string> usedItemIds = new List<string>();
     public void Behaviour(bool isInteracting, bool isInspecting)
@@ -24,7 +24,7 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
             if (requiredItems[i] == Inventory.Instance.GetSelected)
             {
                 Inventory.Instance.UseItem(requiredItems[i]);
-                usedItemIds.Add(requiredItems[i].SaveableObject.Id);
+                usedItemIds.Add(requiredItems[i].Guid.Id);
                 requiredItems.Remove(requiredItems[i]);
                 break;
             }
@@ -52,7 +52,7 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
 
     public void LoadData(GameData data)
     {
-        if (!saveableObject)
+        if (!guid)
         {
             Debug.LogError($"No saveable object on {gameObject}!");
         }
@@ -60,15 +60,15 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
         {
             usedItemIds = new List<string>();
 
-            if (data.RequiredItemsUsed.ContainsKey(saveableObject.Id))
+            if (data.RequiredItemsUsed.ContainsKey(guid.Id))
             {
-                var requiredItemsUsed = data.RequiredItemsUsed[saveableObject.Id];
+                var requiredItemsUsed = data.RequiredItemsUsed[guid.Id];
 
                 foreach (Item item in requiredItems.ToList())
                 {
-                    if (requiredItemsUsed.Contains(item.SaveableObject.Id))
+                    if (requiredItemsUsed.Contains(item.Guid.Id))
                     {
-                        usedItemIds.Add(item.SaveableObject.Id);
+                        usedItemIds.Add(item.Guid.Id);
                         requiredItems.Remove(item);
                     }
                 }
@@ -78,7 +78,7 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
 
     public void SaveData(ref GameData data)
     {
-        if (data.RequiredItemsUsed.ContainsKey(saveableObject.Id)) data.RequiredItemsUsed.Remove(saveableObject.Id);
-        data.RequiredItemsUsed.Add(saveableObject.Id, usedItemIds);
+        if (data.RequiredItemsUsed.ContainsKey(guid.Id)) data.RequiredItemsUsed.Remove(guid.Id);
+        data.RequiredItemsUsed.Add(guid.Id, usedItemIds);
     }
 }

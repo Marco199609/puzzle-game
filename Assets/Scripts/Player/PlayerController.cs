@@ -1,7 +1,6 @@
 using UnityEngine;
 using SnowHorse.Utils;
 
-[RequireComponent (typeof(Raycaster))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
@@ -9,12 +8,6 @@ public class PlayerController : MonoBehaviour
     private bool canInteract;
     private Vector3 hitPoint;
     [SerializeField] private GameObject objectInSight;
-    private Raycaster raycaster;
-
-    private void Awake()
-    {
-        raycaster = GetComponent<Raycaster>();
-    }
 
     void Update()
     {
@@ -27,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
         if(mousePosition != Vector2.zero || Input.GetMouseButtonDown(0))
         {
-            objectInSight = raycaster.Cast2D(
+            objectInSight = Raycaster.Cast2D(
                 origin: _camera.ScreenToWorldPoint(Input.mousePosition),
                 direction: _camera.transform.forward,
                 maxDistance: 50,
