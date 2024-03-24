@@ -36,4 +36,9 @@ public class SaveableObject : MonoBehaviour
             EditorApplication.update -= GenerateGUID;
         }
     }
+
+    private void OnDestroy()
+    {
+        EditorApplication.update -= GenerateGUID;
+    }
 }

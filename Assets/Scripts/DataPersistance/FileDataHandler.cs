@@ -35,6 +35,7 @@ public class FileDataHandler
                 if (useEncryption) dataToLoad = EncryptDecrypt(dataToLoad);
 
                 loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
+                UnityEngine.Debug.Log($"Retrieved saved data from: {fullPath}.");
             }
             catch (Exception e)
             {
@@ -59,6 +60,8 @@ public class FileDataHandler
             using(FileStream fileStream = new FileStream(fullPath, FileMode.Create))
             {
                 using(StreamWriter writer = new StreamWriter(fileStream)) { writer.Write(dataToStore); }
+
+                UnityEngine.Debug.Log($"Saved data to: {fullPath}.");
             }
         }
         catch(Exception e)
