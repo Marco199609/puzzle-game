@@ -9,7 +9,7 @@ public class Behaviour_PlayAudio : MonoBehaviour, IBehaviour
     [SerializeField, Range(0, 1)] private float pitch = 1;
     [SerializeField, Range(0, 1)] private float spatialBlend = 0;
     [SerializeField] private bool playOneShot = true;
-    [SerializeField] private bool useGeneralAudioSource = true;
+    [SerializeField] private bool useGeneralSource = true;
     [SerializeField] private AudioSource source;
 
     public void Behaviour(bool isInteracting, bool isInspecting)
@@ -19,7 +19,7 @@ public class Behaviour_PlayAudio : MonoBehaviour, IBehaviour
 
     private IEnumerator PlayAudio()
     {
-        if(useGeneralAudioSource) source = AudioManager.Instance.generalAudioSource;
+        if(useGeneralSource) source = AudioManager.Instance.generalAudioSource;
 
         if (!source) Debug.Log($"There is no audio source in play audio behaviour on {gameObject.name}!");
         if(!clip) Debug.Log($"There is no audio clip in play audio behaviour on {gameObject.name}!");
