@@ -5,12 +5,12 @@ public class Behaviour_PlayAudio : MonoBehaviour, IBehaviour
 {
     [SerializeField] private float delay;
     [SerializeField] private AudioClip clip;
-    [SerializeField] private AudioSource source;
     [SerializeField, Range(0, 1)] private float volume = 1;
     [SerializeField, Range(0, 1)] private float pitch = 1;
     [SerializeField, Range(0, 1)] private float spatialBlend = 0;
     [SerializeField] private bool playOneShot = true;
     [SerializeField] private bool useGeneralAudioSource = true;
+    [SerializeField] private AudioSource source;
 
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
