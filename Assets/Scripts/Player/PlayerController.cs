@@ -1,4 +1,5 @@
 using UnityEngine;
+using SnowHorse.Utils;
 
 [RequireComponent (typeof(Raycaster))]
 public class PlayerController : MonoBehaviour
@@ -31,9 +32,7 @@ public class PlayerController : MonoBehaviour
                 direction: _camera.transform.forward,
                 maxDistance: 50,
                 layerMask: -1,
-                hitPoint: out hitPoint,
-                debugRay: true,
-                debugColor: Color.red);
+                hitPoint: out hitPoint);
 
             if(objectInSight && objectInSight.TryGetComponent(out Interactable interactable))
             {
