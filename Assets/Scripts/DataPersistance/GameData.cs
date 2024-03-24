@@ -13,5 +13,4 @@ public class GameData
         RequiredItemsUsed = new Dictionary<string, List<string>>();
         ItemsInInventory = new Dictionary<string, bool>();
     }
-
 }

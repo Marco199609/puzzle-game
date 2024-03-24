@@ -28,10 +28,6 @@ public class ObjectGUID : MonoBehaviour
                 Id = Guid.NewGuid().ToString();
                 Debug.Log($"Generated new GUID for {gameObject.name}. If this object existed previously, save file deletion is recommended.");
             }
-            else
-            {
-                Debug.Log($"Detected existing GUID for {gameObject.name}.");
-            }
 
             EditorApplication.update -= Generate;
         }
