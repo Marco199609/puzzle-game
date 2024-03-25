@@ -7,13 +7,18 @@ public class Behaviour_Dialogue : MonoBehaviour, IBehaviour
     [SerializeField] private int dialogueId;
     [SerializeField] private float dialogueDuration = 3;
     [SerializeField] private bool useAudioDuration = true;
+    [SerializeField] private bool playOnce = true;
 
     //This delay starts from the moment the behaviour is triggered, and is not managed by the controller. 
-    [SerializeField] private float dialogueDelay; 
+    [SerializeField] private float dialogueDelay;
+
+    private bool alreadyPlayed;
 
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
-        DialogueController.Instance.StartCoroutine(ShowDialogue());
+        if(playOnce && !alreadyPlayed || !playOnce) DialogueController.Instance.StartCoroutine(ShowDialogue());
+
+        if(playOnce) alreadyPlayed = true;
     }
 
     private IEnumerator ShowDialogue()
