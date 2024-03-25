@@ -8,7 +8,6 @@ public class Behaviour_UseFromInventory : MonoBehaviour, IBehaviour, IDataPersis
 {
     [SerializeField] private List<Item> requiredItems;
     [SerializeField] private List<GameObject> resultingBehaviours;
-
     [SerializeField] private ObjectGUID guid;
 
     private List<string> usedItemIds = new List<string>();

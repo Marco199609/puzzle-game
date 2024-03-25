@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-
 public class Behaviour_Dialogue : MonoBehaviour, IBehaviour
 {
     [SerializeField] private int dialogueId;
@@ -9,15 +8,14 @@ public class Behaviour_Dialogue : MonoBehaviour, IBehaviour
     [SerializeField] private bool useAudioDuration = true;
     [SerializeField] private bool playOnce = true;
 
-    //This delay starts from the moment the behaviour is triggered, and is not managed by the controller. 
-    [SerializeField] private float dialogueDelay;
+    [SerializeField, Tooltip("Remember this delay starts when the behaviour is triggered, and is not managed by the controller.")] 
+    private float dialogueDelay;
 
     private bool alreadyPlayed;
 
     public void Behaviour(bool isInteracting, bool isInspecting)
     {
         if(playOnce && !alreadyPlayed || !playOnce) DialogueController.Instance.StartCoroutine(ShowDialogue());
-
         if(playOnce) alreadyPlayed = true;
     }
 
