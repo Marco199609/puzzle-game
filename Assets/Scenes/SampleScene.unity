@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 261071450}
   - component: {fileID: 261071449}
   - component: {fileID: 261071451}
+  - component: {fileID: 261071452}
   m_Layer: 0
   m_Name: DialogueController
   m_TagString: Untagged
@@ -418,6 +419,21 @@ MonoBehaviour:
   backgroundAnimator: {fileID: 87153443}
   dialogueText: {fileID: 737260958}
   <BackgroundShowClip>k__BackingField: {fileID: 7400000, guid: 01bddedc74f1b4043a45bf0b2f91778c, type: 2}
+--- !u!114 &261071452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261071448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1022f113d03555c4bbf56cf208ab3d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 0.5
+  pitch: 1
+  spatialBlend: 0
 --- !u!1 &335303584
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +665,6 @@ GameObject:
   - component: {fileID: 867610113}
   - component: {fileID: 867610114}
   - component: {fileID: 867610115}
-  - component: {fileID: 867610116}
   m_Layer: 0
   m_Name: Behaviours
   m_TagString: Untagged
@@ -722,21 +737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueId: 0
   dialogueDuration: 2
-  dialogueDelay: 1
---- !u!114 &867610116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867610111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e80bc96e7e10694fa818f56a4777f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueId: 1
-  dialogueDuration: 2
+  useAudioDuration: 1
   dialogueDelay: 1
 --- !u!114 &868532932 stripped
 MonoBehaviour:

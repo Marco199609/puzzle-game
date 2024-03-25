@@ -1,10 +1,12 @@
 {
     "English": {
-        "0": "This is a test 0 of the dialogue system.",
-        "1": "This is a test 1 of the dialogue system."
+        "0": "I can't believe this is real.",
+        "1": "This is the wierdest thing I've seen in all my life.",
+        "3": "White noise."
     },
     "Spanish": {
-        "0": "Esta es la primera prueba del sistema de diálogo.",
-        "1": "Esta es la segunda prueba del sistema de diálogo."
+        "0": "No puedo creer que esto sea real.",
+        "1": "Esta es la cosa más extraña que he visto en mi vida.",
+        "3": "Ruido blanco."
     }
 }

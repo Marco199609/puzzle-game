@@ -20,7 +20,7 @@ public class DialogueUI : MonoBehaviour
         yield return new WaitForSecondsRealtime(BackgroundShowClip.length);
         dialogueText.text = message;
 
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSecondsRealtime(duration);
         dialogueText.text = string.Empty;
         backgroundAnimator.SetBool("showDialogue", false);
     }
