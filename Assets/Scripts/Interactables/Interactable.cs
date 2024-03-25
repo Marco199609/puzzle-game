@@ -1,6 +1,10 @@
 using SnowHorse.Utils;
 using System.Collections.Generic;
 using UnityEngine;
+public interface IBehaviour
+{
+    public void Behaviour(bool isInteracting, bool isInspecting);
+}
 
 public class Interactable : MonoBehaviour
 {
