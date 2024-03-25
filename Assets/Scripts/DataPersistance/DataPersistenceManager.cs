@@ -7,6 +7,7 @@ public class DataPersistenceManager : MonoBehaviour
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption;
+    [SerializeField] private bool enableSaving = true;
 
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
@@ -23,7 +24,8 @@ public class DataPersistenceManager : MonoBehaviour
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
+        if(enableSaving) LoadGame();
+        else Debug.LogWarning("Saving is not enabled!");
     }
 
     public void NewGame()
@@ -49,13 +51,20 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
-        ///Pass the data to other scripts so they can update it
-        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        if (enableSaving)
         {
-            dataPersistenceObj.SaveData(ref gameData);
-        }
+            ///Pass the data to other scripts so they can update it
+            foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+            {
+                dataPersistenceObj.SaveData(ref gameData);
+            }
 
-        dataHandler.Save(gameData);
+            dataHandler.Save(gameData);
+        }
+        else
+        {
+            Debug.LogWarning("Saving is not enabled!");
+        }
     }
 
     private void OnApplicationQuit()

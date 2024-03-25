@@ -6,7 +6,11 @@ public class InputController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(1))
         {
-            if(Inventory.Instance.GetSelected != null) Inventory.Instance.DeselectPreviousItem();
+            if(Inventory.Instance.GetSelected != null)
+            {
+                Inventory.Instance.DeselectPreviousItem();
+                Debug.Log("Deselecting inventory item from input controller!");
+            }   
         }
     }
 }
