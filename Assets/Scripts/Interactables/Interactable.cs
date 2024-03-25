@@ -11,7 +11,12 @@ public class Interactable : MonoBehaviour
         {
             for (int i = 0; i < behaviours.Count; i++)
             {
-                behaviours[i].GetComponent<IBehaviour>().Behaviour(isInteracting, isInspecting);
+                var behaviourComponents = behaviours[i].GetComponents<IBehaviour>();
+
+                for(int j = 0; j < behaviourComponents.Length; j++)
+                {
+                    behaviourComponents[j].Behaviour(isInteracting, isInspecting);
+                }
             }
         }
         else
