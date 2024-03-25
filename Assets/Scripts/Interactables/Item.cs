@@ -16,14 +16,17 @@ public class Item : MonoBehaviour, IDataPersistence
     [NonSerialized] public bool collected = false;
     [NonSerialized] public bool isInInventory = false;
 
+    private void Awake()
+    {
+        Guid = GetComponent<ObjectGUID>();
+    }
 
     public void LoadData(GameData data)
     {
-        Guid = GetComponent<ObjectGUID>();
-
         if (!Guid)
         {
-            Debug.LogError($"No GUID on {gameObject}!");
+            Guid = GetComponent<ObjectGUID>();
+            if(!Guid) Debug.LogError($"No GUID on {gameObject}!");
         }
         else
         {
