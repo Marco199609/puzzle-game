@@ -230,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 6144951709342675821}
   body: {fileID: 896820654400847457}
+  notch: {fileID: 706599995448716538}
   text: {fileID: 2242039190226439233}
   animator: {fileID: 3280427388569256883}
 --- !u!95 &3280427388569256883

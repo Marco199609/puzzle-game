@@ -492,12 +492,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e80bc96e7e10694fa818f56a4777f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   dialogueId: 0
   dialogueDuration: 1
   useAudioDuration: 0
   playOnce: 0
-  speechBubbleSpawnPoint: {fileID: 855720166}
   dialogueDelay: 1
 --- !u!114 &512698527 stripped
 MonoBehaviour:
@@ -748,7 +747,6 @@ MonoBehaviour:
   dialogueDuration: 1
   useAudioDuration: 1
   playOnce: 1
-  speechBubbleSpawnPoint: {fileID: 2091675335}
   dialogueDelay: 1
 --- !u!114 &868532932 stripped
 MonoBehaviour:
@@ -1772,10 +1770,6 @@ PrefabInstance:
     - target: {fileID: 4955467182635588850, guid: 195dd754adc52da4b995be15dc4b03f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6391653436226771751, guid: 195dd754adc52da4b995be15dc4b03f3, type: 3}
-      propertyPath: type
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

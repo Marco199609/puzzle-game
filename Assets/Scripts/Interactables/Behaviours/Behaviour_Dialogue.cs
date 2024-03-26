@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Behaviour_Dialogue : MonoBehaviour, IBehaviour
 {
-    [Header("If speech, place child named BubbleSpawn")]
+    [Header("If speech or dialogue, place child named BubbleSpawn")]
     [SerializeField] private DialogueType type;
     [SerializeField] private int dialogueId;
     [SerializeField] private float dialogueDuration = 3;
@@ -26,7 +26,7 @@ public class Behaviour_Dialogue : MonoBehaviour, IBehaviour
 
     private void GetBubbleSpawner()
     {
-        if(type == DialogueType.Speech)
+        if(type == DialogueType.Speech || type == DialogueType.Thought)
         {
             foreach(Transform child in gameObject.GetComponentsInChildren<Transform>())
             {

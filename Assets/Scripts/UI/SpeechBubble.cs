@@ -7,6 +7,7 @@ public class SpeechBubble : MonoBehaviour
 {
     [SerializeField] private GameObject parent;
     [SerializeField] private GameObject body;
+    [SerializeField] private GameObject notch;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Animator animator;
 
@@ -16,10 +17,11 @@ public class SpeechBubble : MonoBehaviour
     private Vector2 startSize;
     private RectTransform bodyRectTransform;
 
-    public void Set(string message, float duration)
+    public void Set(string message, float duration, DialogueType type)
     {
         text.text = message;
         preferredWidth = text.preferredWidth;
+        if(type == DialogueType.Thought) notch.SetActive(false);
         gameObject.SetActive(true);
         StartCoroutine(SetBodyWidth(duration));
     }

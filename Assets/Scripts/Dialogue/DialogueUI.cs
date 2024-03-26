@@ -19,9 +19,9 @@ public class DialogueUI : MonoBehaviour
 
     private IEnumerator ManageDialogueDuration(string message, float duration, (DialogueType, Vector2) typeAndBubblePos)
     {
-        if (typeAndBubblePos.Item1 == DialogueType.Speech)
+        if (typeAndBubblePos.Item1 == DialogueType.Thought || typeAndBubblePos.Item1 == DialogueType.Speech)
         {
-            Instantiate(speechBubblePrefab, _camera.WorldToScreenPoint(typeAndBubblePos.Item2), Quaternion.identity, dialogueContainer).Set(message, duration);
+            Instantiate(speechBubblePrefab, _camera.WorldToScreenPoint(typeAndBubblePos.Item2), Quaternion.identity, dialogueContainer).Set(message, duration, typeAndBubblePos.Item1);
             yield return null;
         }
         else if(typeAndBubblePos.Item1 == DialogueType.Other)
@@ -40,6 +40,7 @@ public class DialogueUI : MonoBehaviour
 
 public enum DialogueType
 {
+    Thought,
     Speech,
     Other
 }

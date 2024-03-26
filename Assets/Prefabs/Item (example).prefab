@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e80bc96e7e10694fa818f56a4777f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   dialogueId: 2
   dialogueDuration: 1
   useAudioDuration: 0
