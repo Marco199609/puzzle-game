@@ -1,9 +1,7 @@
 using SnowHorse.Utils;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpeechBubble : MonoBehaviour
 {
@@ -12,66 +10,56 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Animator animator;
 
-
     private float preferredWidth;
+    private float fadeThreshold = 0.7f;
+    private float lerpDuration = 0.8f;
     private Vector2 startSize;
     private RectTransform bodyRectTransform;
 
-    private void Start()
+    public void Set(string message, float duration)
     {
-        StartCoroutine(SetBodyWidth());
+        text.text = message;
+        preferredWidth = text.preferredWidth;
+        gameObject.SetActive(true);
+        StartCoroutine(SetBodyWidth(duration));
     }
 
-    private IEnumerator SetBodyWidth()
+    private IEnumerator SetBodyWidth(float duration)
     {
         text.color = new Color();
         bodyRectTransform = body.GetComponent<RectTransform>();
-        preferredWidth = text.preferredWidth;
-        startSize = bodyRectTransform.sizeDelta;
-
+        
         var percent = 0f;
         var lerpRef = 0f;
-
+        startSize = bodyRectTransform.sizeDelta;
         var targetSize = new Vector2(preferredWidth, bodyRectTransform.sizeDelta.y);
 
         while (percent < 1)
         {
-            percent = Interpolation.Smoother(1.5f, ref lerpRef);
-
+            percent = Interpolation.Smoother(lerpDuration, ref lerpRef);
             bodyRectTransform.sizeDelta = Vector2.Lerp(startSize, targetSize, percent);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(bodyRectTransform);
             yield return null;
         }
-        text.color = Color.black;
 
-        yield return StartCoroutine(TextBubbleDuration(3));
+        text.color = Color.black;
+        yield return StartCoroutine(TextBubbleDuration(duration));
     }
 
     private IEnumerator TextBubbleDuration(float duration)
     {
-        yield return new WaitForSecondsRealtime(duration);
-
+        yield return new WaitForSecondsRealtime(duration - lerpDuration);
         text.color = new Color();
 
         var percent = 0f;
         var lerpRef = 0f;
-
         var startSize = bodyRectTransform.sizeDelta;
         var targetSize = this.startSize;
 
         while (percent < 1)
         {
-            percent = Interpolation.Smoother(1.5f, ref lerpRef);
-
+            percent = Interpolation.Smoother(lerpDuration, ref lerpRef);
             bodyRectTransform.sizeDelta = Vector2.Lerp(startSize, targetSize, percent);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(bodyRectTransform);
-
-            if(percent >= 0.7f)
-            {
-                animator.SetBool("fade", true);
-            }
-
-
+            if(percent >= fadeThreshold) animator.SetBool("fade", true);
             yield return null;
         }
 

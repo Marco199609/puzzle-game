@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -34.666}
+  m_AnchoredPosition: {x: 960, y: 43}
   m_SizeDelta: {x: 91.4243, y: 69.332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2416376199264152511
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 1779843728333504800}
   - component: {fileID: 3280427388569256883}
   m_Layer: 0
-  m_Name: speech_bubble_body
+  m_Name: speech_bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 56.461}
+  m_AnchoredPosition: {x: 0, y: 117}
   m_SizeDelta: {x: 1920, y: 112.91998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779843728333504800

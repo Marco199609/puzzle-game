@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class DialogueController : MonoBehaviour
@@ -19,6 +20,7 @@ public class DialogueController : MonoBehaviour
     private DialogueAudio _audio;
     private Coroutine manageDialogueCache;
     private List<(int, (float, bool))> dialogueCache = new List<(int, (float, bool))>(); //id, duration, override audio duration
+    private List<(DialogueType, Vector2)> dialogueTypeAndBubblePositions = new List<(DialogueType, Vector2)>();
 
     private void Awake()
     {
@@ -30,9 +32,10 @@ public class DialogueController : MonoBehaviour
         _audio = GetComponent<DialogueAudio>();
     }
 
-    public void PlayDialogue(int id, float duration, bool useAudioDuration = true)
+    public void PlayDialogue(int id, float duration, DialogueType type, Vector2 bubblePosition = new Vector2(), bool useAudioDuration = true)
     {
         dialogueCache.Add((id,(duration, useAudioDuration)));
+        dialogueTypeAndBubblePositions.Add((type, bubblePosition));
         if (manageDialogueCache == null) manageDialogueCache = StartCoroutine(ManageDialogueCache());
 
         Debug.Log($"Current dialogue lines in cache: {dialogueCache.Count}");
@@ -59,10 +62,11 @@ public class DialogueController : MonoBehaviour
             var dialogueClip = (AudioClip) Resources.Load($"Dialogues/dialogue{dialogueCache[0].Item1}");
             if(dialogueClip) _audio.PlayDialogueClip(dialogueClip);
             var dialogueDuration = GetDialogueDuration(dialogueClip);
-            ui.ShowDialogueText(text, dialogueDuration);
+            ui.ShowDialogueText(text, dialogueDuration, dialogueTypeAndBubblePositions[0]);
 
             yield return new WaitForSecondsRealtime(dialogueDuration + timeBetweenDialogueLines);
             dialogueCache.RemoveAt(0);
+            dialogueTypeAndBubblePositions.RemoveAt(0);
             Debug.Log($"Current dialogue lines in cache: {dialogueCache.Count}");
         }
 

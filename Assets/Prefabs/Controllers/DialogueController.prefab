@@ -62,6 +62,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundAnimator: {fileID: 0}
   dialogueText: {fileID: 0}
+  speechBubblePrefab: {fileID: 1779843728333504800, guid: 7c92393c18537e64c8c6b46e8273d601, type: 3}
+  dialogueContainer: {fileID: 0}
   <BackgroundShowClip>k__BackingField: {fileID: 7400000, guid: 01bddedc74f1b4043a45bf0b2f91778c, type: 2}
 --- !u!114 &5085953905513149901
 MonoBehaviour:
