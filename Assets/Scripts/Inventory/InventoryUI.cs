@@ -22,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     private Button selectedSlot;
     private int movingItemCount = 0;
 
+    public int MovingItemCount { get => movingItemCount; }
     public Button[] GetSlots { get => slots; }
 
     private void Awake()
@@ -74,7 +75,6 @@ public class InventoryUI : MonoBehaviour
             if (!slots[i].gameObject.activeInHierarchy)
             {
                 StartCoroutine(AddToInventoryUI(item, image, slots[i].transform, previewItem: previewOnUI, dataPersistenceMode));
-                //movingItems.Add(coroutine);
                 return;
             }
         }

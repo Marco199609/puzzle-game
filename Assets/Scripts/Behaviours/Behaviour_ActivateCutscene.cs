@@ -14,6 +14,6 @@ public class Behaviour_ActivateCutscene : MonoBehaviour, IBehaviour
     private IEnumerator ActivateCutscene()
     {
         yield return new WaitForSecondsRealtime(delay);
-        UIController.Instance.ShowCutscene(duration);
+        CinematicsController.Instance.StartCutscene(duration);
     }
 }

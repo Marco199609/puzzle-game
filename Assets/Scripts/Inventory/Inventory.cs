@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private Transform usedItemsParent;
+    [SerializeField] private GameObject uiContainer;
 
     private int maxInventoryCount;
     private List<Item> inventory = new List<Item>();
@@ -26,7 +27,8 @@ public class Inventory : MonoBehaviour
     public List<Item> GetInventoryItems { get => inventory; }
     public Item GetSelected { get => selectedItem; }
 
-    [NonSerialized] public bool CanAddItems = true;
+    public bool CanAddItems { get; private set; } = true;
+    public bool IsInventoryInactive { get; private set; }
 
     public void Add(Item item, bool previewOnUI, bool dataPersistenceMode = false)
     {
@@ -73,5 +75,24 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log($"Item {item.Name} does not exist in inventory!");
         }
+    }
+
+    public void DeactivateInventory(float duration)
+    {
+        var inventoryDeactivationPadding = 0.5f;
+        StartCoroutine(InventoryDeactivationControl(duration + inventoryDeactivationPadding));
+    }
+
+    private IEnumerator InventoryDeactivationControl(float duration)
+    {
+        CanAddItems = false;
+
+        yield return new WaitUntil(()=> inventoryUI.MovingItemCount <= 0);
+        uiContainer.SetActive(false);
+        IsInventoryInactive = true;
+        yield return new WaitForSecondsRealtime(duration);
+        IsInventoryInactive = false;
+        uiContainer.SetActive(true);
+        CanAddItems = true;
     }
 }

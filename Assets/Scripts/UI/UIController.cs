@@ -10,8 +10,9 @@ public class UIController : MonoBehaviour
     [SerializeField] private Texture2D circle;
     [SerializeField] private Animator cinematicBarsAnimator;
     [Header("Cutscene")]
-    [SerializeField] private GameObject inventoryContainer;
     [SerializeField] private AnimationClip hideBarsClip;
+
+    public float UiBarsClipDuration { get => hideBarsClip.length + 1.5f; }
 
     public static UIController Instance;
 
@@ -38,12 +39,9 @@ public class UIController : MonoBehaviour
 
     private IEnumerator CinematicBarControl(float duration)
     {
-        inventoryContainer.SetActive(false);
         cinematicBarsAnimator.SetBool("activate", true);
         yield return new WaitForSecondsRealtime(duration);
         cinematicBarsAnimator.SetBool("activate", false);
-        yield return new WaitForSecondsRealtime(hideBarsClip.length + 1.5f);
-        inventoryContainer.SetActive(true);
     }
     #endregion
 }

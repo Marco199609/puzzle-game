@@ -12,19 +12,19 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private Camera _camera;
     [field: SerializeField] public AnimationClip BackgroundShowClip { get; private set; }
 
-    public void ShowDialogueText(string message, float duration, (DialogueType, Vector2) typeAndBubblePos)
+    public void ShowDialogueText(string message, float duration, DialogueType type, Vector2 bubblePos)
     {
-        StartCoroutine(ManageDialogueDuration(message, duration, typeAndBubblePos));
+        StartCoroutine(ManageDialogueDuration(message, duration, type, bubblePos));
     }
 
-    private IEnumerator ManageDialogueDuration(string message, float duration, (DialogueType, Vector2) typeAndBubblePos)
+    private IEnumerator ManageDialogueDuration(string message, float duration, DialogueType type, Vector2 bubblePos)
     {
-        if (typeAndBubblePos.Item1 == DialogueType.Thought || typeAndBubblePos.Item1 == DialogueType.Speech)
+        if (type == DialogueType.Thought || type == DialogueType.Speech)
         {
-            Instantiate(speechBubblePrefab, _camera.WorldToScreenPoint(typeAndBubblePos.Item2), Quaternion.identity, dialogueContainer).Set(message, duration, typeAndBubblePos.Item1);
+            Instantiate(speechBubblePrefab, _camera.WorldToScreenPoint(bubblePos), Quaternion.identity, dialogueContainer).Set(message, duration, type);
             yield return null;
         }
-        else if(typeAndBubblePos.Item1 == DialogueType.Other)
+        else if(type == DialogueType.Other)
         {
             backgroundAnimator.SetBool("showDialogue", true);
 

@@ -26,22 +26,21 @@ public class Behaviour_Dialogue : MonoBehaviour, IBehaviour
 
     private void GetBubbleSpawner()
     {
-        if(type == DialogueType.Speech || type == DialogueType.Thought)
+        switch(type)
         {
-            foreach(Transform child in gameObject.GetComponentsInChildren<Transform>())
-            {
-                if(child.name == "BubbleSpawn") speechBubbleSpawnPoint = child;
-            }
+            case DialogueType.Speech:
+            case DialogueType.Thought:
+                foreach (Transform child in gameObject.GetComponentsInChildren<Transform>())
+                {
+                    if (child.name == "BubbleSpawn") speechBubbleSpawnPoint = child;
+                }
 
-            if (!speechBubbleSpawnPoint)
-            {
-                speechBubbleSpawnPoint = transform;
+                speechBubbleSpawnPoint = !speechBubbleSpawnPoint ? transform : speechBubbleSpawnPoint;
                 Debug.LogWarning($"Could not find speech bubble spawner on gameobject: {gameObject.name}, parent: {transform.parent.name}!");
-            }
-        }
-        else if(type == DialogueType.Other)
-        {
-            speechBubbleSpawnPoint = transform;
+                break;
+            case DialogueType.Other:
+                speechBubbleSpawnPoint = transform;
+                break;
         }
     }
 
