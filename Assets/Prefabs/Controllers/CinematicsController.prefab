@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1215332123368593632
+--- !u!1 &666370618284229336
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6049454172908072041}
-  - component: {fileID: 2936628799997139765}
+  - component: {fileID: 8744505623708309904}
+  - component: {fileID: 4585631574256712368}
   m_Layer: 0
-  m_Name: DataPersistenceManager
+  m_Name: CinematicsController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6049454172908072041
+--- !u!4 &8744505623708309904
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215332123368593632}
+  m_GameObject: {fileID: 666370618284229336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.8825006, y: 0.012410004, z: 0.021841815}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2936628799997139765
+--- !u!114 &4585631574256712368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215332123368593632}
+  m_GameObject: {fileID: 666370618284229336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01dc748a18e100340bf91a0a14535f9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b30d165d9d2d1d429551e29a66d766b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data
-  useEncryption: 1
-  enableSaving: 0
